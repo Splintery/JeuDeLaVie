@@ -1,3 +1,4 @@
+package Vue;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.LinkedList;
