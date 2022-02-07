@@ -2,7 +2,6 @@ package Modele;
 
 import java.util.LinkedList;
 
-import Vue.Cellule;
 
 public class Grille {
 	private LinkedList<Cellule> cellulesV;
@@ -17,7 +16,7 @@ public class Grille {
 	
 	public boolean possedeVoisine(Cellule c) {
 		for(Cellule cell : cellulesV) {
-			if((cell.x==c.x-1&&cell.y==c.y-1)||(cell.x==c.x-1&&cell.y==c.y)||(cell.x==c.x-1&&cell.y==c.y+1)||(cell.x==c.x&&cell.y==c.y-1)||(cell.x==c.x&&cell.y==c.y+1)||(cell.x==c.x+1&&cell.y==c.y-1)||(cell.x==c.x+1&&cell.y==c.y)||(cell.x==c.x+1&&cell.y==c.y+1)) {
+			if((cell.getX()==c.getX()-1&&cell.getY()==c.getY()-1)||(cell.getX()==c.getX()-1&&cell.getY()==c.getY())||(cell.getX()==c.getX()-1&&cell.getY()==c.getY()+1)||(cell.getX()==c.getX()&&cell.getY()==c.getY()-1)||(cell.getX()==c.getX()&&cell.getY()==c.getY()+1)||(cell.getX()==c.getX()+1&&cell.getY()==c.getY()-1)||(cell.getX()==c.getX()+1&&cell.getY()==c.getY())||(cell.getX()==c.getX()+1&&cell.getY()==c.getY()+1)) {
 				return true;
 			}
 		}
