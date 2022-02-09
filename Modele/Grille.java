@@ -23,4 +23,26 @@ public class Grille {
 		return true;
 	}	
 	
+	public boolean estVivante(int x, int y) {
+		for(Cellule c : cellulesV) {
+			if(c.getX()==x&&c.getY()==y) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public LinkedList<Coordonnees> getCellulesVoisines(Cellule c){
+		LinkedList<Coordonnees> res = new LinkedList<Coordonnees>();
+		res.add(new Coordonnees(c.getX()-1,c.getY()-1));
+		res.add(new Coordonnees(c.getX()-1,c.getY()));
+		res.add(new Coordonnees(c.getX()-1,c.getY()+1));
+		res.add(new Coordonnees(c.getX(),c.getY()-1));
+		res.add(new Coordonnees(c.getX(),c.getY()+1));
+		res.add(new Coordonnees(c.getX()+1,c.getY()-1));
+		res.add(new Coordonnees(c.getX()+1,c.getY()));
+		res.add(new Coordonnees(c.getX()+1,c.getY()+1));
+		return res;
+	}
+	
 }
