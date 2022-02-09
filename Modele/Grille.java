@@ -21,7 +21,6 @@ public class Grille {
 			}
 		}
 		return true;
-	}
-	
+	}	
 	
 }

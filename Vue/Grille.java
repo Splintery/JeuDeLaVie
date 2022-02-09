@@ -13,7 +13,7 @@ private int test; // juste pour tester quelque fonction en attendant d'avoir un 
 public Grille(){
     CelluleV = new LinkedList<Cellule>();
     this.setSize(1000,1000);
-    this.setResizable(false);
+    this.setResizable(true);
     this.setBackground(Color.BLUE);
     this.setLayout(null);
     this.setVisible(true);
