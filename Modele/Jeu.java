@@ -1,14 +1,14 @@
 package Modele;
 
 public class Jeu {
-	private Grille grille;
+	private GrilleM grille;
 	private Regles regles;
 	
 	public Jeu() {
-		grille=new Grille();
+		grille=new GrilleM();
 	}
 	
-	public Grille getGrille() {
+	public GrilleM getGrille() {
 		return this.grille;
 	}
 	
