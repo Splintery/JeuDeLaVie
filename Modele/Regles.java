@@ -12,13 +12,13 @@ public class Regles {
 	}
 
 public static void regle1(Cellule c){  //Toute cellule vivante qui a moins de deux voisines vivantes meurt.
-	if(GrilleM.celluleVoisineV(c)<2){
+	if(GrilleM.nbCelluleVoisineV(c)<2){
 		GrilleM.removeCelluleV(c.getX(), c.getY());
 	}
 }
 
 public static void regle3(Cellule c){ //Toute cellule qui a plus de trois voisines vivantes meurt.
-	if(GrilleM.celluleVoisineV(c)>3){
+	if(GrilleM.nbCelluleVoisineV(c)>3){
 		GrilleM.removeCelluleV(c.getX(), c.getY());
 	}
 }
