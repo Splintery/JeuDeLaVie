@@ -10,23 +10,6 @@ public class Regles {
 		this.mortePrendVie=mortePrendVie;
 		this.vivanteResteEnVie=vivanteResteEnVie;
 	}
-
-public static void regle1(Cellule c){  //Toute cellule vivante qui a moins de deux voisines vivantes meurt.
-	if(GrilleM.nbCelluleVoisineV(c)<2){
-		GrilleM.removeCelluleV(c.getX(), c.getY());
-	}
-}
-
-public static void regle3(Cellule c){ //Toute cellule qui a plus de trois voisines vivantes meurt.
-	if(GrilleM.nbCelluleVoisineV(c)>3){
-		GrilleM.removeCelluleV(c.getX(), c.getY());
-	}
-}
-
-public static void testRegle(){
-	for(Cellule c:GrilleM.getCelluleV()){
-		regle1(c);
-		regle3(c);
-	}
-}
+	
+	
 }
