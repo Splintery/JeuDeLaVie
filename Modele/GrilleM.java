@@ -58,7 +58,7 @@ public class GrilleM {
 	}
 
 
-	public static int celluleVoisineV(Cellule c){   // renvoie le nombre de cellules voisines vivantes
+	public static int nbCelluleVoisineV(Cellule c){   // renvoie le nombre de cellules voisines vivantes
 		int res=0;
 		if(estVivante(c.getX()-1, c.getY()-1)) res++;
 		if(estVivante(c.getX()-1, c.getY())) res++;
@@ -71,7 +71,7 @@ public class GrilleM {
 		return res;
 	}
 
-	public static int celluleVoisineM(Cellule c){  // renvoie le nombre de cellules voisines mortes
+	public static int nbCelluleVoisineM(Cellule c){  // renvoie le nombre de cellules voisines mortes
 		int res=0;
 		if(!estVivante(c.getX()-1, c.getY()-1)) res++;
 		if(!estVivante(c.getX()-1, c.getY())) res++;
