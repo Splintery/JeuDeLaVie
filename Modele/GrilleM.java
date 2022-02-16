@@ -31,16 +31,16 @@ public class GrilleM {
 		return false;
 	}
 	
-	public LinkedList<Coordonnees> getCellulesVoisines(Coordonnees c){
-		LinkedList<Coordonnees> res = new LinkedList<Coordonnees>();
-		res.add(new Coordonnees(c.getX()-1,c.getY()-1));
-		res.add(new Coordonnees(c.getX()-1,c.getY()));
-		res.add(new Coordonnees(c.getX()-1,c.getY()+1));
-		res.add(new Coordonnees(c.getX(),c.getY()-1));
-		res.add(new Coordonnees(c.getX(),c.getY()+1));
-		res.add(new Coordonnees(c.getX()+1,c.getY()-1));
-		res.add(new Coordonnees(c.getX()+1,c.getY()));
-		res.add(new Coordonnees(c.getX()+1,c.getY()+1));
+	public LinkedList<Cellule> getCellulesVoisines(Cellule c){
+		LinkedList<Cellule> res = new LinkedList<Cellule>();
+		res.add(new Cellule(c.getX()-1,c.getY()-1));
+		res.add(new Cellule(c.getX()-1,c.getY()));
+		res.add(new Cellule(c.getX()-1,c.getY()+1));
+		res.add(new Cellule(c.getX(),c.getY()-1));
+		res.add(new Cellule(c.getX(),c.getY()+1));
+		res.add(new Cellule(c.getX()+1,c.getY()-1));
+		res.add(new Cellule(c.getX()+1,c.getY()));
+		res.add(new Cellule(c.getX()+1,c.getY()+1));
 		return res;
 	}
 
@@ -58,7 +58,7 @@ public class GrilleM {
 	}
 
 
-	public static int nbCelluleVoisineV(Coordonnees c){   // renvoie le nombre de cellules voisines vivantes
+	public static int nbCelluleVoisineV(Cellule c){   // renvoie le nombre de cellules voisines vivantes
 		int res=0;
 		if(estVivante(c.getX()-1, c.getY()-1)) res++;
 		if(estVivante(c.getX()-1, c.getY())) res++;
@@ -71,7 +71,7 @@ public class GrilleM {
 		return res;
 	}
 
-	public static int nbCelluleVoisineM(Coordonnees c){  // renvoie le nombre de cellules voisines mortes
+	public static int nbCelluleVoisineM(Cellule c){  // renvoie le nombre de cellules voisines mortes
 		int res=0;
 		if(!estVivante(c.getX()-1, c.getY()-1)) res++;
 		if(!estVivante(c.getX()-1, c.getY())) res++;

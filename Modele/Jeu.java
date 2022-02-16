@@ -18,26 +18,26 @@ public class Jeu {
 		return this.regles;
 	}
 	
-	public void regle1(Coordonnees c){  //Toute cellule vivante qui a moins de deux voisines vivantes meurt.
+	public void regle1(Cellule c){  //Toute cellule vivante qui a moins de deux voisines vivantes meurt.
 		if(grille.nbCelluleVoisineV(c)<2){
 			grille.removeCelluleV(c.getX(), c.getY());
 		}
 	}
 
-	public void regle3(Coordonnees c){ //Toute cellule qui a plus de trois voisines vivantes meurt.
+	public void regle3(Cellule c){ //Toute cellule qui a plus de trois voisines vivantes meurt.
 		if(grille.nbCelluleVoisineV(c)>3){
 			grille.removeCelluleV(c.getX(), c.getY());
 		}
 	}
 	
-	public LinkedList<Coordonnees> cellulesAVerif() {
-		LinkedList<Coordonnees> res=new LinkedList<Coordonnees>();
-		LinkedList<Coordonnees> cellulesAModif=new LinkedList<Coordonnees>();
+	public LinkedList<Cellule> cellulesAVerif() {
+		LinkedList<Cellule> res=new LinkedList<Cellule>();
+		LinkedList<Cellule> cellulesAModif=new LinkedList<Cellule>();
 		for(Cellule c : this.grille.getCelluleV()) {
-			Coordonnees cell=new Coordonnees(c.getX(),c.getY());
+			Cellule cell=new Cellule(c.getX(),c.getY());
 			res.add(cell);
-			LinkedList<Coordonnees> voisinesCoordonnees=this.grille.getCellulesVoisines(cell);
-			for(Coordonnees voisine : voisinesCoordonnees) {
+			LinkedList<Cellule> voisinesCellule=this.grille.getCellulesVoisines(cell);
+			for(Cellule voisine : voisinesCellule) {
 				if(res.contains(voisine)==false) {
 					res.add(voisine);
 				}
@@ -46,9 +46,9 @@ public class Jeu {
 		return res;
 	}
 	
-	public LinkedList<Coordonnees> cellulesAModif(LinkedList<Coordonnees> cellulesAVerif) {
-		LinkedList<Coordonnees> res=new LinkedList<Coordonnees>();
-		for(Coordonnees c : cellulesAVerif) {
+	public LinkedList<Cellule> cellulesAModif(LinkedList<Cellule> cellulesAVerif) {
+		LinkedList<Cellule> res=new LinkedList<Cellule>();
+		for(Cellule c : cellulesAVerif) {
 			if(this.doitEtreModif(c)) {
 				res.add(c);
 			}
@@ -57,7 +57,7 @@ public class Jeu {
 		
 	}
 	
-	public boolean doitEtreModif(Coordonnees c) {
+	public boolean doitEtreModif(Cellule c) {
 		if(grille.estVivante(c.getX(), c.getY())) {
 			if(regles.getVivanteResteEnVie().contains(this.grille.nbCelluleVoisineV(c))==false) {
 				return true;
@@ -71,8 +71,8 @@ public class Jeu {
 	}
 	
 	
-	public void changeEtatGrille(LinkedList<Coordonnees> cellules){
-		for(Coordonnees c : cellules ) {
+	public void changeEtatGrille(LinkedList<Cellule> cellules){
+		for(Cellule c : cellules ) {
 			boolean vivante=false;
 			for(Cellule cell : this.grille.getCelluleV()) {
 				if(cell.getX()==c.getX()||cell.getY()==c.getY()) {
