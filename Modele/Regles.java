@@ -11,5 +11,11 @@ public class Regles {
 		this.vivanteResteEnVie=vivanteResteEnVie;
 	}
 	
+	public LinkedList<Integer> getMortePrendVie(){
+		return this.mortePrendVie;
+	}
 	
+	public LinkedList<Integer> getVivanteResteEnVie(){
+		return this.mortePrendVie;
+	}
 }

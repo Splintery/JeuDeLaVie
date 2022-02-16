@@ -16,4 +16,12 @@ public class Coordonnees {
 	public int getY(){
 		return y;
 	}
+	@Override
+	public boolean equals(Object o) {
+		Coordonnees c=(Coordonnees)o;
+		if(this.x==c.getX()&&this.y==c.getY()) {
+			return true;
+		}
+		return false;
+	}
 }

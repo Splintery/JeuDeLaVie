@@ -18,28 +18,58 @@ public class Jeu {
 		return this.regles;
 	}
 	
-	public void regle1(Cellule c){  //Toute cellule vivante qui a moins de deux voisines vivantes meurt.
+	public void regle1(Coordonnees c){  //Toute cellule vivante qui a moins de deux voisines vivantes meurt.
 		if(grille.nbCelluleVoisineV(c)<2){
 			grille.removeCelluleV(c.getX(), c.getY());
 		}
 	}
 
-	public void regle3(Cellule c){ //Toute cellule qui a plus de trois voisines vivantes meurt.
+	public void regle3(Coordonnees c){ //Toute cellule qui a plus de trois voisines vivantes meurt.
 		if(grille.nbCelluleVoisineV(c)>3){
 			grille.removeCelluleV(c.getX(), c.getY());
 		}
 	}
-
-	public void testRegle(){
-		for(Cellule c:GrilleM.getCelluleV()){
-			regle1(c);
-			regle3(c);
+	
+	public LinkedList<Coordonnees> cellulesAVerif() {
+		LinkedList<Coordonnees> res=new LinkedList<Coordonnees>();
+		LinkedList<Coordonnees> cellulesAModif=new LinkedList<Coordonnees>();
+		for(Cellule c : this.grille.getCelluleV()) {
+			Coordonnees cell=new Coordonnees(c.getX(),c.getY());
+			res.add(cell);
+			LinkedList<Coordonnees> voisinesCoordonnees=this.grille.getCellulesVoisines(cell);
+			for(Coordonnees voisine : voisinesCoordonnees) {
+				if(res.contains(voisine)==false) {
+					res.add(voisine);
+				}
+			}
 		}
+		return res;
 	}
 	
-	public LinkedList<Coordonnees> cellulesAModif() {
+	public LinkedList<Coordonnees> cellulesAModif(LinkedList<Coordonnees> cellulesAVerif) {
+		LinkedList<Coordonnees> res=new LinkedList<Coordonnees>();
+		for(Coordonnees c : cellulesAVerif) {
+			if(this.doitEtreModif(c)) {
+				res.add(c);
+			}
+		}
+		return res;
 		
 	}
+	
+	public boolean doitEtreModif(Coordonnees c) {
+		if(grille.estVivante(c.getX(), c.getY())) {
+			if(regles.getVivanteResteEnVie().contains(this.grille.nbCelluleVoisineV(c))==false) {
+				return true;
+			}
+		}else {
+			if(regles.getMortePrendVie().contains(this.grille.nbCelluleVoisineV(c))==false) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	
 	public void changeEtatGrille(LinkedList<Coordonnees> cellules){
 		for(Coordonnees c : cellules ) {
