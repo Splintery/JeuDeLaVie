@@ -1,25 +1,21 @@
-package view;
+package Vue;
 
-import java.awt.GraphicsEnvironment;
-import java.awt.Rectangle;
-
-import javax.swing.JFrame;
-
-import controller.Controller;
-import model.Model;
+import javax.swing.*;
+import java.awt.*;
+import Vue.GameScreen;
+import Modele.GrilleM;
 
 public class GameOfLifeFrame extends JFrame {
 
-	private static final long serialVersionUID = 1L;
 	public int initWindowWidth;
 	public int initWindowHeight;
 	public GameScreen gameScreen;
 
-	public GameOfLifeFrame(Controller controller, int width, int height) {
+	public GameOfLifeFrame(GrilleM board, int width, int height) {
 		//Le rectangle recupere possede 4 champs, x, y, width et height
 		//Il represente la taille maximale disponible pour afficher une fenetre en pixels
 		Rectangle tmpBounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-		this.gameScreen = new GameScreen(controller);
+		this.gameScreen = new GameScreen(board);
 		frameSetUp(width, height);
 	}
 	private void frameSetUp(int width, int height) {
@@ -32,12 +28,12 @@ public class GameOfLifeFrame extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		Model board = new Model(null);
-		board.ajouterCellule(new model.Cellule(10, 5));
-		board.ajouterCellule(new model.Cellule(4, 9));
-		board.ajouterCellule(new model.Cellule(7, 12));
-		board.ajouterCellule(new model.Cellule(-50, -23));
+		GrilleM board = new GrilleM();
+		board.addCelluleV(new Modele.Cellule(10, 5));
+		board.addCelluleV(new Modele.Cellule(4, 9));
+		board.addCelluleV(new Modele.Cellule(7, 12));
+		board.addCelluleV(new Modele.Cellule(-50, -23));
 
-//		GameOfLifeFrame test = new GameOfLifeFrame(board, 1000, 500);
+		GameOfLifeFrame test = new GameOfLifeFrame(board, 1000, 500);
 	}
 }
