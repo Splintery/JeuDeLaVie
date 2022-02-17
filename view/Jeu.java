@@ -1,15 +1,15 @@
-package Vue;
-import Modele.Regles; 
+package view;
+import model.Regles; 
 
 public class Jeu {
 public static int compteur=0;
 
 public Jeu(){
-    GrilleV test = new GrilleV();
+    Grille test = new Grille(null);
 
     while(compteur>=10 && compteur<999){ // pour l'instant en attendant d'avoir un vrai bouton play pause
         System.out.println("tour "+compteur); // ca va dire tour 10 mais osef c juste pour le début en attendant le vrai bouton
-        Regles.testRegle();
+        //Regles.testRegle();
         compteur++;
     }
 }
