@@ -36,7 +36,7 @@ public class Jeu {
 		for(Cellule c : this.grille.getCellulesVivantes()) {
 			Cellule cell=new Cellule(c.getX(),c.getY());
 			res.add(cell);
-			LinkedList<Cellule> voisinesCellule=this.grille.getCellulesVoisines(cell);
+			LinkedList<Cellule> voisinesCellule=this.grille.getCellulesVoisinesVivantes(cell);
 			for(Cellule voisine : voisinesCellule) {
 				if(res.contains(voisine)==false) {
 					res.add(voisine);
