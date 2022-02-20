@@ -3,37 +3,55 @@ package controller;
 import java.util.concurrent.TimeUnit;
 
 import model.Model;
-import view.View;
+import view.Fenetre;
 
+/**
+ * 
+ * @author THIBAULT
+ *
+ */
 public class Controller {
 	
-	public View view;
-	public Model grille;
-	//private boolean isPaused;
+	/**
+	 * Vue associée au contrôleur.
+	 */
+	public Fenetre view;
 	
+	/**
+	 * Modèle associé au contrôleur.
+	 */
+	public Model model;
+	
+	/**
+	 * Constructeur du Controller.
+	 */
 	public Controller() {
-		this.view = new View(this);
-		this.grille = new Model(this);
+		this.view = new Fenetre(this);
+		this.model = new Model(this);
 		
-		/*
-		this.view.menu.addPlayButtonListener(e -> {
-			System.out.println("dedans");
-			while(!isPaused) {
-				try {
-					TimeUnit.SECONDS.sleep(1);
-				} catch (InterruptedException ie) {
-					ie.printStackTrace();
-				}
-				this.grille.update();
+		addPlayButtonListener();	
+		addPauseButtonListener();
+	}
+	
+	/**
+	 * Pour l'instant: fait jouer 1 seul tour par click.
+	 */
+	private void addPlayButtonListener() {
+		view.menu.addPlayButtonListener(e -> {
+			try {
+				TimeUnit.SECONDS.sleep(1);
+			} catch (InterruptedException ie) {
+				ie.printStackTrace();
 			}
-			
+			model.update();
+			view.grille.refresh();
 		});
-		
-		
-		this.view.menu.addPauseButtonListener(e -> {
-			isPaused = true;
+	}
+	
+	private void addPauseButtonListener() {
+		view.menu.addPauseButtonListener(e -> {
+			// TODO: faire un boutton pause fonctionnel
 		});
-		*/
 	}
 
 }
