@@ -1,12 +1,21 @@
 package model;
 
 import java.util.LinkedList;
+import java.util.Random;
 
 import controller.Controller;
 
-
+/**
+ * La classe modèle contient la logique du jeu de la vie.
+ * 
+ * @author 
+ *
+ */
 public class Model {
 	
+	/**
+	 * Le controlleur associé au modèle afin de lui passer les données.
+	 */
 	public Controller controller;
 	
 	/**
@@ -14,12 +23,36 @@ public class Model {
 	 */
 	private LinkedList<Cellule> cellulesVivantes = new LinkedList<>();
 	
+	/**
+	 * Représente la génération courante, c'est-à-dire à quel tour on en est.
+	 */
+	private int generation;
+	
+	/**
+	 * Le constructeur du Model.
+	 * 
+	 * @param controller le contrôleur associé au Model
+	 */
 	public Model(Controller controller) {
 		this.controller = controller;
 	}
 	
+	/**
+	 * Getter de liste des cellules vivantes.
+	 * 
+	 * @return la liste des cellules vivantes.
+	 */
 	public LinkedList<Cellule> getCellulesVivantes(){
 		return cellulesVivantes;
+	}
+	
+	/**
+	 * Getter sur le nombre de générations.
+	 * 
+	 * @return le nombre de générations passées
+	 */
+	public int getGeneration() {
+		return generation;
 	}
 	
 	/**
@@ -30,6 +63,7 @@ public class Model {
 		LinkedList<Cellule> cellulesAFaireNaitre = cellulesAFaireNaitre();
 		supprimerCellulesMortes(cellulesASupprimer);
 		ajouterCellulesAFaireNaitre(cellulesAFaireNaitre);
+		generation++;
 	}
 	
 	/**
@@ -43,7 +77,7 @@ public class Model {
 	}
 	
 	/**
-	 * Vérifie si une cellule est vivante, c'est-à-dire si elle est présente dans la liste de cellules.
+	 * Vérifie à partir d'une instance de Cellule si une cellule est vivante, c'est-à-dire si elle est présente dans la liste de cellules.
 	 * 
 	 * @param une cellule c
 	 * @return true si c est contenue dans la liste de cellules, false sinon
@@ -52,11 +86,24 @@ public class Model {
 		return cellulesVivantes.contains(c);
 	}
 	
+	/**
+	 * Vérifie à partir de coordonnées si une cellule est vivante, c'est-à-dire si elle est présente dans la liste de cellules.
+	 * 
+	 * @param x l'entier sur l'axe des abscisses
+	 * @param y l'entier sur l'axe des ordonnées
+	 * @return true si c est contenue dans la liste de cellules, false sinon
+	 */
 	public boolean estVivante(int x, int y) {
 		return estVivante(new Cellule(x, y));
 	}
 	
-	public LinkedList<Cellule> getCellulesVoisines(Cellule c){
+	/**
+	 * Prend une Cellule c en argument et retourne la liste de ses voisines vivantes.
+	 * 
+	 * @param c la cellule dont on vérifie les voisines
+	 * @return la liste des cellules voisines vivantes de la Cellule c
+	 */
+	public LinkedList<Cellule> getCellulesVoisinesVivantes(Cellule c){
 		LinkedList<Cellule> res = new LinkedList<>();
 		for (int i = c.getX() - 1; i <= c.getX() + 1; i++)
 			for (int j = c.getY() - 1; j <= c.getY() + 1; j++)
@@ -65,6 +112,12 @@ public class Model {
 		return res;
 	}
 	
+	/**
+	 * Prend une Cellule c en argument et retourne la liste de ses voisines mortes.
+	 * 
+	 * @param c la cellule dont on vérifie les voisines
+	 * @return la liste des cellules voisines mortes de la Cellule c
+	 */
 	public LinkedList<Cellule> getCellulesVoisinesMortes(Cellule c) {
 		LinkedList<Cellule> res = new LinkedList<>();
 		for (int i = c.getX() - 1; i <= c.getX() + 1; i++)
@@ -86,6 +139,12 @@ public class Model {
 	 	return false;
 	}
 	
+	/**
+	 * Ajoute une liste de cellules aux cellules vivantes et retourne l'instance.
+	 * 
+	 * @param cellules les cellules à ajouter
+	 * @return l'instance du Model sur laquelle est appelée cette méthode
+	 */
 	public Model avecCellules(Cellule... cellules) {
 		for (Cellule c : cellules)
 			if (!cellulesVivantes.contains(c))
@@ -132,20 +191,21 @@ public class Model {
 	}
 	
 	/**
-	 * Supprime les cellules mortes après un tour.
+	 * Supprime de la liste des cellules vivantes celles mortes après un tour.
 	 * 
-	 * @param l
+	 * @param l la liste des cellules à faire mourir
 	 */
-	private void supprimerCellulesMortes(LinkedList<Cellule> l) {
-		for (Cellule c : l) {
-			cellulesVivantes.remove(c);
-		}
+	private void supprimerCellulesMortes(LinkedList<Cellule> cellulesMortes) {
+		cellulesVivantes.removeAll(cellulesMortes);
 	}
 	
-	private void ajouterCellulesAFaireNaitre(LinkedList<Cellule> l) {
-		for (Cellule c : l) {
-			cellulesVivantes.add(c);
-		}
+	/**
+	 * Ajoute à la liste des cellules vivantes les nouvelles cellules qui doivent naître.
+	 * 
+	 * @param l la liste des cellules à faire naitre
+	 */
+	private void ajouterCellulesAFaireNaitre(LinkedList<Cellule> cellulesAFaireNaitre) {
+		cellulesVivantes.addAll(cellulesAFaireNaitre);
 	}
 	
 	/**
@@ -163,18 +223,30 @@ public class Model {
 		return cellulesASupprimer;
 	}
 	
+	/**
+	 * Liste toutes les cellules à faire naître.
+	 * 
+	 * @return la liste des cellules à ajouter à la liste des cellules vivantes
+	 */
 	public LinkedList<Cellule> cellulesAFaireNaitre() {
 		LinkedList<Cellule> cellulesAFaireNaitre = new LinkedList<>();
-		for (Cellule c : cellulesVivantes)
-			for (Cellule d : getCellulesVoisinesMortes(c))
-				if (nbDecellulesVoisinesVivantes(d) == 3 && !cellulesAFaireNaitre.contains(d))
-					cellulesAFaireNaitre.add(d);
+		LinkedList<Cellule> cellulesMortesDejaVisitees = new LinkedList<>(); // Liste des cellules mortes déjà visitées pour éviter de traîter plusieurs fois un même point
+		for (Cellule c : cellulesVivantes) { // Pour toutes les cellules vivantes,
+			for (Cellule d : getCellulesVoisinesMortes(c)) { // telles que pour toutes leurs cellules voisines mortes,
+				if (!cellulesMortesDejaVisitees.contains(d)) { // si celle-ci n'a pas déjà été traîtée:
+					cellulesMortesDejaVisitees.add(d);
+					if (nbDecellulesVoisinesVivantes(d) == 3 && !cellulesAFaireNaitre.contains(d)) {
+						cellulesAFaireNaitre.add(d);
+					}
+				}
+			}
+		}
 		return cellulesAFaireNaitre;
 	}
 	
 	@Override
 	public String toString() {
-		return cellulesVivantes + "";
+		return cellulesVivantes.toString();
 	}
 	
 	/**
@@ -222,6 +294,26 @@ public class Model {
 		}
 	}
 	
+	/**
+	 * Place des cellules aléatoirement (par rapport au centre de coordonnées (0, 0)) dans un certain rectangle.
+	 * 
+	 * @param nbCellules
+	 * @param largeur
+	 * @param hauteur
+	 */
+	public void placerCellulesAleatoirement(int nbCellulesAPlacer, int largeur, int hauteur) {
+		Random r = new Random();
+		int cellulesPlacees = 0;
+		while (cellulesPlacees != nbCellulesAPlacer) {
+			int x = -(largeur / 2) + r.nextInt(largeur + 1);
+			int y = -(hauteur / 2) + r.nextInt(hauteur + 1);
+			if (!estVivante(x, y)) {
+				ajouterCellule(new Cellule(x, y));
+				cellulesPlacees++;
+			}
+		}
+	}
+	
 	// Pour tester
 	@SuppressWarnings("unused")
 	public static void main(String[] args) throws InterruptedException {
@@ -248,7 +340,7 @@ public class Model {
 				new Cellule(97, 39), new Cellule(97, 40), new Cellule(98, 39), new Cellule(98, 40)
 				);
 		
-		exec(canonAPlaneur, 1500, 10);
+		exec(canonAPlaneur, 1500, 1000);
 	}
 	
 }
