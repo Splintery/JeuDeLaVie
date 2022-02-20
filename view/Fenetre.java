@@ -10,8 +10,8 @@ import controller.Controller;
 public class Fenetre extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
-	private Grille grille;
-	private Menu menu;
+	public Grille grille;
+	public Menu menu;
 	
 	@SuppressWarnings("unused")
 	private Controller controller;
