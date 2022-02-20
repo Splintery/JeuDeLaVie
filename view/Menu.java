@@ -3,7 +3,6 @@ package view;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -20,8 +19,6 @@ public class Menu extends JPanel {
 	private JSlider zoomSlider = new JSlider(0, 100);
 	
 	public Controller controller;
-	
-	private boolean isPaused;
 
 	public Menu(Controller controller){
 		this.controller = controller;
@@ -30,23 +27,6 @@ public class Menu extends JPanel {
 	    this.setBackground(Color.DARK_GRAY);
 	    this.setLayout(null);
 	    this.setVisible(true);
-	    
-	    playButton.addActionListener(e -> {
-			while(!isPaused) {
-				try {
-					TimeUnit.SECONDS.sleep(1);
-				} catch (InterruptedException ie) {
-					ie.printStackTrace();
-				}
-				this.controller.grille.update();
-				this.controller.view.grille.refresh();
-			}
-			
-		});
-	    
-	    pauseButton.addActionListener(e -> {
-	    	isPaused = !isPaused;
-	    });
 	    
 	    playButton.setBounds(100, 100, 100, 30);
 	    add(playButton);
