@@ -6,15 +6,12 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 import controller.Controller;
-import model.Model;
 
 public class GameScreen extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	protected int midWidth;
 	protected int midHeight;
-
-	public Model board;
 
 	protected int sizeCell;
 	protected int maxX;
@@ -52,7 +49,7 @@ public class GameScreen extends JPanel {
 		maxY = this.getSize().height / this.sizeCell;
 	}
 	private void paintCell(Graphics g) {
-		for (model.Cellule c : this.board.getCellulesVivantes()) {
+		for (model.Cellule c : this.controller.model.getCellulesVivantes()) {
 			if (isValid(c)) {
 				g.fillRect(this.midWidth + c.getX()*sizeCell, this.midHeight + c.getY()*sizeCell, this.sizeCell, this.sizeCell);
 			}

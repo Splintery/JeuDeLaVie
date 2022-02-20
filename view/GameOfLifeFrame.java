@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import javax.swing.JFrame;
 
 import controller.Controller;
+import model.Cellule;
 import model.Model;
 
 public class GameOfLifeFrame extends JFrame {
@@ -32,12 +33,12 @@ public class GameOfLifeFrame extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		Model board = new Model(null);
-		board.ajouterCellule(new model.Cellule(10, 5));
-		board.ajouterCellule(new model.Cellule(4, 9));
-		board.ajouterCellule(new model.Cellule(7, 12));
-		board.ajouterCellule(new model.Cellule(-50, -23));
+		Controller board = new Controller();
+		board.model.ajouterCellule(new Cellule(10, 5));
+		board.model.ajouterCellule(new Cellule(4, 9));
+		board.model.ajouterCellule(new Cellule(7, 12));
+		board.model.ajouterCellule(new Cellule(-50, -23));
 
-//		GameOfLifeFrame test = new GameOfLifeFrame(board, 1000, 500);
+		new GameOfLifeFrame(board, 1000, 500);
 	}
 }
