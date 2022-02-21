@@ -18,5 +18,14 @@ public class Cellule {
 		return y;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) return false;
+		if (obj instanceof Cellule) {
+			Cellule c = (Cellule) obj;
+			return c.x == x && c.y == y;
+		}
+		return false;
+	}
 	
 }
