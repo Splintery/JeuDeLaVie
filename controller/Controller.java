@@ -39,11 +39,6 @@ public class Controller {
 	 */
 	private void addPlayButtonListener() {
 		view.menu.addPlayButtonListener(e -> {
-			try {
-				TimeUnit.SECONDS.sleep(1);
-			} catch (InterruptedException ie) {
-				ie.printStackTrace();
-			}
 			model.update();
 			view.grille.refresh();
 		});
