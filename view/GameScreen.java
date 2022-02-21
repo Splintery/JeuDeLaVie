@@ -1,24 +1,28 @@
-package Vue;
+package view;
 
-import javax.swing.*;
-import java.awt.*;
-import Modele.*;
+import java.awt.Color;
+import java.awt.Graphics;
+
+import javax.swing.JPanel;
+
+import controller.Controller;
 
 public class GameScreen extends JPanel {
 
+	private static final long serialVersionUID = 1L;
 	protected int midWidth;
 	protected int midHeight;
-
-	public GrilleM board;
 
 	protected int sizeCell;
 	protected int maxX;
 	protected int maxY;
+	
+	protected Controller controller;
 
-	public GameScreen(GrilleM board) {
+	public GameScreen(Controller controller) {
 		this.midWidth = this.getSize().width/2;
 		this.midHeight = this.getSize().height/2;
-		this.board = board;
+		this.controller = controller;
 		//Pour le moment la taille des Cellules est fixee a 10
 		sizeCell = 10;
 		//La taille de maxX et maxY depend de sizeCell et la taille du JPanel
@@ -45,13 +49,13 @@ public class GameScreen extends JPanel {
 		maxY = this.getSize().height / this.sizeCell;
 	}
 	private void paintCell(Graphics g) {
-		for (Modele.Cellule c : this.board.getCelluleV()) {
+		for (model.Cellule c : this.controller.model.getCellulesVivantes()) {
 			if (isValid(c)) {
 				g.fillRect(this.midWidth + c.getX()*sizeCell, this.midHeight + c.getY()*sizeCell, this.sizeCell, this.sizeCell);
 			}
 		}
 	}
-	private boolean isValid(Modele.Cellule c) {
+	private boolean isValid(model.Cellule c) {
 		//La verif consiste a verifier si la cellule est comprise
 		//entre (-maxX, -maxY) et (maxX, maxY)
 		return (c.getX() < this.maxX && c.getY() < this.maxY) && (c.getX() > -this.maxX && c.getY() > -this.maxY);
