@@ -19,6 +19,7 @@ public class Jeu {
 	}
 	
 	public void regle1(Cellule c){  //Toute cellule vivante qui a moins de deux voisines vivantes meurt.
+		System.out.println("test regle 1");
 		if(grille.nbDecellulesVoisinesVivantes(c) < 2){
 			grille.retirerCellule(c);
 		}
