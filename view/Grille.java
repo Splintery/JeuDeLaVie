@@ -25,9 +25,6 @@ public class Grille extends JPanel implements MouseInputListener{
 	}
 	
 	public void refresh() {
-		if (controller.model.getCellulesVivantes().size() == 0) {
-			removeAll();
-		}
 		removeAll();
 	    for(Cellule c : controller.model.getCellulesVivantes()){
 	        JPanel celluleV = new JPanel();
