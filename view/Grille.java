@@ -25,13 +25,11 @@ public class Grille extends JPanel implements MouseInputListener{
 	}
 	
 	public void refresh() {
-		if (controller.model.getCellulesVivantes().size() == 0) {
-			removeAll();
-		}
+		removeAll();
 	    for(Cellule c : controller.model.getCellulesVivantes()){
 	        JPanel celluleV = new JPanel();
 	        celluleV.setBackground(Color.BLACK);
-	        celluleV.setBounds(c.getX(), c.getY(), 20, 20);
+	        celluleV.setBounds(c.getX()*20, c.getY()*20, 20, 20);
 	        celluleV.setVisible(true);
 	        this/*.getContentPane()*/.add(celluleV);
 	    }
@@ -41,8 +39,9 @@ public class Grille extends JPanel implements MouseInputListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 	    int x = e.getX()-(e.getX()%20); // moins lui meme %30 pour obtenir un jolie chiffre pour travailler plus facilement apres ( ex : x=97 -> x=80) et aussi pour aligner les cellulles
-	    int y = e.getY()-(e.getY()%20)-this.getInsets().top+11; // +1 juste pour avoir un chiffre rond, car avec des test on sait que inset.top=31
-        controller.model.ajouterCellule(new Cellule(x, y));
+	    int y = e.getY()-(e.getY()%20)-this.getInsets().top;
+        controller.model.ajouterCellule(new Cellule(x/20, y/20));
+		System.out.println(x/20+" "+y/20);
         refresh();
 	}
 	

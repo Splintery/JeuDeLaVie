@@ -18,4 +18,6 @@ public class Regles {
 	public LinkedList<Integer> getVivanteResteEnVie(){
 		return this.vivanteResteEnVie;
 	}
+
+	
 }

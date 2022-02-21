@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import model.Model;
 import view.Fenetre;
+import model.Jeu;
 
 /**
  * 
@@ -13,12 +14,12 @@ import view.Fenetre;
 public class Controller {
 	
 	/**
-	 * Vue associée au contrôleur.
+	 * Vue associï¿½e au contrï¿½leur.
 	 */
 	public Fenetre view;
 	
 	/**
-	 * Modèle associé au contrôleur.
+	 * Modï¿½le associï¿½ au contrï¿½leur.
 	 */
 	public Model model;
 	
@@ -38,11 +39,6 @@ public class Controller {
 	 */
 	private void addPlayButtonListener() {
 		view.menu.addPlayButtonListener(e -> {
-			try {
-				TimeUnit.SECONDS.sleep(1);
-			} catch (InterruptedException ie) {
-				ie.printStackTrace();
-			}
 			model.update();
 			view.grille.refresh();
 		});
