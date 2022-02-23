@@ -28,6 +28,7 @@ public class Model {
 	 */
 	private int generation;
 	
+	public Regles regles;
 	/**
 	 * Le constructeur du Model.
 	 * 
@@ -35,6 +36,12 @@ public class Model {
 	 */
 	public Model(Controller controller) {
 		this.controller = controller;
+		LinkedList<Integer> mortePrendVie = new LinkedList<Integer>();
+		mortePrendVie.add(3);
+		LinkedList<Integer> vivanteResteEnVie = new LinkedList<Integer>();
+		vivanteResteEnVie.add(2);
+		vivanteResteEnVie.add(3);
+		this.regles=new Regles(mortePrendVie,vivanteResteEnVie);
 	}
 	
 	/**
@@ -217,8 +224,9 @@ public class Model {
 		LinkedList<Cellule> cellulesASupprimer = new LinkedList<>();
 		for (Cellule c : cellulesVivantes) {
 			int nombreVoisines = nbDecellulesVoisinesVivantes(c);
-			if (nombreVoisines != 2 && nombreVoisines != 3)
+			if (!(this.regles.getVivanteResteEnVie().contains(nombreVoisines))) {
 				cellulesASupprimer.add(c);
+			}
 		}
 		return cellulesASupprimer;
 	}
@@ -235,7 +243,7 @@ public class Model {
 			for (Cellule d : getCellulesVoisinesMortes(c)) { // telles que pour toutes leurs cellules voisines mortes,
 				if (!cellulesMortesDejaVisitees.contains(d)) { // si celle-ci n'a pas d�j� �t� tra�t�e:
 					cellulesMortesDejaVisitees.add(d);
-					if (nbDecellulesVoisinesVivantes(d) == 3 && !cellulesAFaireNaitre.contains(d)) {
+					if (this.regles.getMortePrendVie().contains(nbDecellulesVoisinesVivantes(d))&& !cellulesAFaireNaitre.contains(d)) {
 						cellulesAFaireNaitre.add(d);
 					}
 				}

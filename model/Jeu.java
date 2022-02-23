@@ -17,20 +17,7 @@ public class Jeu {
 	public Regles getRegles() {
 		return this.regles;
 	}
-	
-	public void regle1(Cellule c){  //Toute cellule vivante qui a moins de deux voisines vivantes meurt.
-		System.out.println("test regle 1");
-		if(grille.nbDecellulesVoisinesVivantes(c) < 2){
-			grille.retirerCellule(c);
-		}
-	}
-
-	public void regle3(Cellule c){ //Toute cellule qui a plus de trois voisines vivantes meurt.
-		if(grille.nbDecellulesVoisinesVivantes(c) > 3){
-			grille.retirerCellule(c);
-		}
-	}
-	
+		
 	public LinkedList<Cellule> cellulesAVerif() {
 		LinkedList<Cellule> res=new LinkedList<Cellule>();
 		LinkedList<Cellule> cellulesAModif = new LinkedList<Cellule>();
@@ -64,7 +51,7 @@ public class Jeu {
 				return true;
 			}
 		}else {
-			if(regles.getMortePrendVie().contains(this.grille.nbDecellulesVoisinesVivantes(c))==false) {
+			if(regles.getMortePrendVie().contains(this.grille.nbDecellulesVoisinesVivantes(c))) {
 				return true;
 			}
 		}
