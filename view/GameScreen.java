@@ -2,20 +2,30 @@ package view;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseWheelListener;
+import java.awt.event.MouseWheelEvent;
 
 import javax.swing.JPanel;
 
 import controller.Controller;
 
-public class GameScreen extends JPanel {
+public class GameScreen extends JPanel implements KeyListener, MouseWheelListener {
 
 	private static final long serialVersionUID = 1L;
 	protected int midWidth;
 	protected int midHeight;
 
-	protected int sizeCell;
+	//Pour le moment la taille des Cellules est fixee a 10
+	protected int sizeCell = 10;
 	protected int maxX;
 	protected int maxY;
+
+	//Ces deux entiers representent des coordonnees x et y, elles sont utilisees pour
+	//decaler les cellules dans la vue, les cellules ne sont pas alterees
+	private int decalageX = 0;
+	private int decalageY = 0;
 	
 	protected Controller controller;
 
@@ -23,8 +33,6 @@ public class GameScreen extends JPanel {
 		this.midWidth = this.getSize().width/2;
 		this.midHeight = this.getSize().height/2;
 		this.controller = controller;
-		//Pour le moment la taille des Cellules est fixee a 10
-		sizeCell = 10;
 		//La taille de maxX et maxY depend de sizeCell et la taille du JPanel
 		//IL faudras que ca evolue avec la taille du JPanel
 		maxX = this.getSize().width / this.sizeCell;
@@ -51,13 +59,50 @@ public class GameScreen extends JPanel {
 	private void paintCell(Graphics g) {
 		for (model.Cellule c : this.controller.model.getCellulesVivantes()) {
 			if (isValid(c)) {
-				g.fillRect(this.midWidth + c.getX()*sizeCell, this.midHeight + c.getY()*sizeCell, this.sizeCell, this.sizeCell);
+				g.fillRect(this.midWidth + (c.getX()+this.decalageX)*sizeCell, this.midHeight + (c.getY()+this.decalageY)*sizeCell, this.sizeCell, this.sizeCell);
 			}
 		}
 	}
 	private boolean isValid(model.Cellule c) {
 		//La verif consiste a verifier si la cellule est comprise
 		//entre (-maxX, -maxY) et (maxX, maxY)
-		return (c.getX() < this.maxX && c.getY() < this.maxY) && (c.getX() > -this.maxX && c.getY() > -this.maxY);
+		return (c.getX()+this.decalageX < this.maxX && c.getY()+this.decalageY < this.maxY) && (c.getX()+this.decalageX > -this.maxX && c.getY()+this.decalageY > -this.maxY);
+	}
+	//On est oblige de redefinir cette methode mais elle ne nous est pas utile
+	public void keyReleased(KeyEvent e) {
+
+	}
+	//De meme pour celle ci
+	public void keyTyped(KeyEvent e) {
+
+	}
+	//Les valeurs 37, 38, 39, et 40 representent les fleches gauche, haut, droite et bas respectivement
+	public void keyPressed(KeyEvent e) {
+		switch(e.getKeyCode()) {
+			case 37 :
+				this.decalageX--;
+				break;
+			case 38 :
+				this.decalageY--;
+				break;
+			case 39 :
+				this.decalageX++;
+				break;
+			case 40 :
+				this.decalageY++;
+				break; 
+		}
+		this.repaint();
+	}
+	//getWheelRotation() retourne 1 si l'on zoom vers le haut et -1 vers le bas
+	public void mouseWheelMoved(MouseWheelEvent e) {
+		//Ici 1000 represente la taille maximale en pixel d'une cellule
+		if (e.getWheelRotation() > 0 && this.sizeCell < 1000) {
+			this.sizeCell++;
+		//Ici 1 represente la taille minimale en pixel d'une cellule
+		} else if (e.getWheelRotation() < 0 && this.sizeCell > 1){
+			this.sizeCell--;
+		}
+		this.repaint();
 	}
 }

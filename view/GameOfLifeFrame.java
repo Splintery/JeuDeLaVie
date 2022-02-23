@@ -20,6 +20,9 @@ public class GameOfLifeFrame extends JFrame {
 		//Il represente la taille maximale disponible pour afficher une fenetre en pixels
 		Rectangle tmpBounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
 		this.gameScreen = new GameScreen(controller);
+		this.gameScreen.addKeyListener(this.gameScreen);
+		this.gameScreen.addMouseWheelListener(this.gameScreen);
+		this.gameScreen.setFocusable(true);
 		frameSetUp(width, height);
 	}
 	private void frameSetUp(int width, int height) {
