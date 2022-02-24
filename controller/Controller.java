@@ -1,10 +1,7 @@
 package controller;
 
-import java.util.concurrent.TimeUnit;
-
 import model.Model;
 import view.Fenetre;
-import model.Jeu;
 
 /**
  * 
