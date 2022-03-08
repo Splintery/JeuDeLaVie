@@ -33,4 +33,9 @@ public class Fenetre extends JFrame {
 	    this.getContentPane().add(menu);
 	}
 
+	public void menuRepaint(){
+		menu.repaint();
+	}
+
+	
 }
