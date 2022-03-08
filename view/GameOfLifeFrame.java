@@ -22,6 +22,8 @@ public class GameOfLifeFrame extends JFrame {
 		this.gameScreen = new GameScreen(controller);
 		this.gameScreen.addKeyListener(this.gameScreen);
 		this.gameScreen.addMouseWheelListener(this.gameScreen);
+		this.gameScreen.addMouseMotionListener(this.gameScreen);
+		this.gameScreen.addMouseListener(this.gameScreen);
 		this.gameScreen.setFocusable(true);
 		frameSetUp(width, height);
 	}

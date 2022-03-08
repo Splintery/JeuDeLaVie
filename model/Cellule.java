@@ -4,8 +4,8 @@ public class Cellule {
 	
 	private int x;
 	private int y;
-	private int tempsDeVie=1;
-	private Color couleur=Color.RED;
+	private int tempsDeVie = 1;
+	private Color couleur = Color.RED;
 	
 	public Cellule(int x, int y) {
 		this.x = x;
