@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Représente les règles du jeu.
+ * Represente les regles du jeu.
  * 
  * @author 
  *
@@ -12,8 +12,8 @@ import java.util.List;
 public class Regles {
 	
 	/**
-	 * Le rayon dans lequel les voisines d'une Cellule seront comptées.
-	 * Vaut 1 dans les règles de base.
+	 * Le rayon dans lequel les voisines d'une Cellule seront comptees.
+	 * Vaut 1 dans les regles de base.
 	 */
 	private final int rayon;
 	
@@ -48,9 +48,9 @@ public class Regles {
 	}
 
 	/**
-	 * Méthode statique retournant les règles du jeu de base.
+	 * Methode statique retournant les regles du jeu de base.
 	 * 
-	 * @return les règles du jeu de base
+	 * @return les regles du jeu de base
 	 */
 	public static Regles getReglesDeBase() {
 		return new Regles(1, new LinkedList<Integer>(List.of(2, 3)), new LinkedList<Integer>(List.of(3)));
