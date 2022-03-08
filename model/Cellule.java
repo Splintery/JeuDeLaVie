@@ -47,4 +47,9 @@ public class Cellule {
 		return false;
 	}
 	
+	@Override
+	public String toString() {
+		return "x :" + this.x + " y : " + this.y;
+	}
+	
 }

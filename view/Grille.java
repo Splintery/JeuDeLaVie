@@ -50,15 +50,32 @@ public class Grille extends JPanel implements MouseInputListener{
 	    }
 		repaint();
 	}
+	public void RetirerCellule(){       
+		removeAll();
+		for(Cellule c : controller.model.getCellulesVivantes()){
+	        JPanel celluleV = new JPanel();
+	        celluleV.setBackground(c.getColor());
+	        celluleV.setBounds(c.getX()*20, c.getY()*20, 20, 20);
+	        celluleV.setVisible(true);
+	        this/*.getContentPane()*/.add(celluleV);
+	    }
+		repaint();
+	}
 	
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 	    int x = e.getX()-(e.getX()%20); // moins lui meme %30 pour obtenir un jolie chiffre pour travailler plus facilement apres ( ex : x=97 -> x=80) et aussi pour aligner les cellulles
 	    int y = e.getY()-(e.getY()%20)-this.getInsets().top;
-        controller.model.ajouterCellule(new Cellule(x/20, y/20));
+	    Cellule c= new Cellule(x/20, y/20);
+	    if(this.controller.model.estVivante(c)) {
+	    	controller.model.retirerCellule(c); 
+	    	RetirerCellule();
+	    }else {
+	    	controller.model.ajouterCellule(c);
+	    	PlacerCellule();
+	    }
 		System.out.println(Menu.nbr);
-        PlacerCellule();
 	}
 	
 	@Override
