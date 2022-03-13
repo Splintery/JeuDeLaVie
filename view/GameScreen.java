@@ -14,6 +14,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JPanel;
 
 import controller.Controller;
+import model.Cellule;
 
 public class GameScreen extends JPanel implements KeyListener, MouseWheelListener, MouseMotionListener, MouseListener{
 

@@ -5,7 +5,7 @@ public class Cellule {
 	private int x;
 	private int y;
 	private int tempsDeVie = 1;
-	private Color couleur = Color.RED;
+	private Color couleur = Color.WHITE;
 	
 	public Cellule(int x, int y) {
 		this.x = x;
@@ -30,11 +30,11 @@ public class Cellule {
 	
     public void update(){
         tempsDeVie++;
-        if(tempsDeVie==2) couleur=Color.ORANGE;
-        if(tempsDeVie==3) couleur=Color.YELLOW;
-        if(tempsDeVie==4) couleur=Color.GREEN;
-        if(tempsDeVie==5) couleur=Color.BLUE;
-        if(tempsDeVie>5) couleur=Color.PINK;
+        int up = 255-(tempsDeVie*30);
+        if(up<0){
+            up=0;
+        }
+        couleur= new Color(up,up,up);
     }
 	
 	@Override
