@@ -91,6 +91,11 @@ public class Model {
 		ajouterCellulesAFaireNaitre(cellulesAFaireNaitre);
 		generation++;
 	}
+	public void updateColor() {
+		for (Cellule c :this.cellulesVivantes) {
+			c.update();
+		}
+	}
 	
 	/**
 	 * Regarde si une cellule possede au moins une cellule voisine vivante.
