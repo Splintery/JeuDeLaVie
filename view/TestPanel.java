@@ -109,9 +109,9 @@ public class TestPanel extends JPanel implements KeyListener, MouseWheelListener
 		return (c.getX()+this.decalageX < this.maxX && c.getY()+this.decalageY < this.maxY) && (c.getX()+this.decalageX > -this.maxX && c.getY()+this.decalageY > -this.maxY);
 	}
 	public void mouseClicked(MouseEvent e) {
-	    int x = (e.getX()-this.midWidth) / this.sizeCell - this.decalageX;
-		int y = (e.getY()-this.midHeight) / this.sizeCell - this.decalageY;
-		Cellule c = new Cellule(x, y);
+	    double x = Math.floor((double)(e.getX()-this.midWidth) / this.sizeCell) - this.decalageX;
+		double y = Math.floor((double)(e.getY()-this.midHeight) / this.sizeCell) - this.decalageY;
+		Cellule c = new Cellule((int)x, (int)y);
 	    if(this.controller.model.estVivante(c)) {
 	    	controller.model.retirerCellule(c);
 	    }else {
