@@ -77,9 +77,6 @@ public class Menu extends JPanel {
 		});
 	}
 	
-	public void stateChanged(ChangeEvent e) {
-		label.setText("Vitesse : " + this.vitesseSlider.getValue() + "%");
-	}
 
 	public static void updateRound(){
 		nbr++;
