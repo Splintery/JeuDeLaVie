@@ -35,8 +35,8 @@ public class Grille extends JPanel implements MouseInputListener{
 	        celluleV.setVisible(true);
 	        this/*.getContentPane()*/.add(celluleV);
 	    }
-		Menu.updateTour();
-		controller.view.menuRepaint();
+		Menu.updateRound();
+		// controller.view.menuRepaint();
 	    repaint();
 	}
 

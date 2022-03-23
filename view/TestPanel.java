@@ -1,10 +1,12 @@
 package view;
 
-import javax.swing.JPanel;
 import controller.Controller;
 import model.Cellule;
+import model.Model;
 import view.Menu;
 import java.awt.Point;
+import java.util.LinkedList;
+import javax.swing.JPanel;
 
 import java.awt.Graphics;
 import java.awt.Color;
@@ -79,28 +81,20 @@ public class TestPanel extends JPanel implements KeyListener, MouseWheelListener
 		maxY = this.getSize().height / this.sizeCell;
 	}
 	private void paintCell(Graphics g) {
-		for (model.Cellule c : this.controller.model.getCellulesVivantes()) {
-			if (isValid(c)) {
-				g.setColor(c.getColor());
-				g.fillRect(this.midWidth + (c.getX()+this.decalageX)*sizeCell, this.midHeight + (c.getY()+this.decalageY)*sizeCell, this.sizeCell, this.sizeCell);
+		try {
+			LinkedList<Cellule> tmp = this.controller.model.getCellulesVivantes();
+			for (int i = 0; i < tmp.size(); i++) {
+
+				if (isValid(tmp.get(i))) {
+					g.setColor(tmp.get(i).getColor());
+					g.fillRect(this.midWidth + (tmp.get(i).getX()+this.decalageX)*sizeCell, this.midHeight + (tmp.get(i).getY()+this.decalageY)*sizeCell, this.sizeCell, this.sizeCell);
+
+				}
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("ERROR FOUND !!!");
 		}
-	}
-	
-	public void refresh() {
-		Menu.updateTour();
-		controller.view.menuRepaint();
-	    repaint();
-		// removeAll();
-	 //    for(Cellule c : controller.model.getCellulesVivantes()){
-	 //        JPanel celluleV = new JPanel();
-		// 	c.update(); //pour rajouter +1 au temps de vie de la cellule
-	 //        celluleV.setBackground(c.getColor());
-	 //        celluleV.setBounds(c.getX()*20, c.getY()*20, 20, 20);
-	 //        celluleV.setVisible(true);
-	 //        this/*.getContentPane()*/.add(celluleV);
-	 //    }
-		
 	}
 
 	private boolean isValid(model.Cellule c) {
@@ -117,7 +111,6 @@ public class TestPanel extends JPanel implements KeyListener, MouseWheelListener
 	    }else {
 	    	controller.model.ajouterCellule(c);
 	    }
-	    repaint();
 	}
 	
 	
@@ -134,7 +127,6 @@ public class TestPanel extends JPanel implements KeyListener, MouseWheelListener
 		this.decalageX += (int)(this.prevPoint.getX() - this.currentPoint.getX());
 		this.decalageY += (int)(this.prevPoint.getY() - this.currentPoint.getY());
 		this.prevPoint = this.currentPoint;
-		this.repaint();
 	}
 
 	//getWheelRotation() retourne 1 si l'on zoom vers le haut et -1 vers le bas
@@ -146,7 +138,6 @@ public class TestPanel extends JPanel implements KeyListener, MouseWheelListener
 		} else if (e.getWheelRotation() < 0 && this.sizeCell > 1){
 			this.sizeCell--;
 		}
-		this.repaint();
 	}
 
 	//Les valeurs 37, 38, 39, et 40 representent les fleches gauche, haut, droite et bas respectivement
@@ -165,7 +156,6 @@ public class TestPanel extends JPanel implements KeyListener, MouseWheelListener
 				this.decalageY--;
 				break; 
 		}
-		this.repaint();
 	}
 
 	public void mouseMoved(MouseEvent e) {}

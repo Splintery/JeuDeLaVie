@@ -21,7 +21,7 @@ public class Model {
 	/**
 	 * Liste contenant tous les points des cellules vivantes.
 	 */
-	public LinkedList<Cellule> cellulesVivantes = new LinkedList<>();
+	public volatile LinkedList<Cellule> cellulesVivantes = new LinkedList<>();
 	
 	/**
 	 * Represente la generation courante, c'est-a-dire a quel tour on en est.
@@ -89,6 +89,7 @@ public class Model {
 		LinkedList<Cellule> cellulesAFaireNaitre = cellulesAFaireNaitre();
 		supprimerCellulesMortes(cellulesASupprimer);
 		ajouterCellulesAFaireNaitre(cellulesAFaireNaitre);
+		updateColor();
 		generation++;
 	}
 	public void updateColor() {
