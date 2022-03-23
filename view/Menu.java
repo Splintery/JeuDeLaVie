@@ -3,6 +3,8 @@ package view;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -17,15 +19,15 @@ public class Menu extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private JButton playButton = new JButton("Lecture");
-	private JButton pauseButton = new JButton("Pause");
-	private JButton refreshButton = new JButton("Clear");
-	private JButton reglesButton = new JButton("Règles");
-	private JSlider vitesseSlider = new JSlider(0, 100);
-	public static int nbr=0;
-	private JLabel label = new JLabel();
-	private static JLabel nbrTour = new JLabel("Tour : "+nbr);
 
+	public JButton playButton = new JButton("Play");
+	public JButton pauseButton = new JButton("Pause");
+	public JButton refreshButton = new JButton("Clear");
+	private JButton rulesButton = new JButton("Rules");
+	public JSlider speedSlider = new JSlider(0, 100, 1);
+	public static int nbr=0;
+	public static JLabel nbrRound = new JLabel("Round : "+nbr);
+	private JLabel speedLabel = new JLabel();
 	
 	public Controller controller;
 
@@ -41,52 +43,60 @@ public class Menu extends JPanel {
 	    add(playButton);
 	    
 	    pauseButton.setBounds(100, 170, 100, 30);
+	    pauseButton.setEnabled(false);
 	    add(pauseButton);
 	    
-	    vitesseSlider.setBounds(100, 240, 100, 30);
-	    add(vitesseSlider);
-	    
-	    label.setBounds(120, 280, 100, 30);
-	    add(label);
-	    
-	    reglesButton.setBounds(100, 400, 100, 30);
-	    add(reglesButton);
-	    
-	    label.setText("Vitesse : " + this.vitesseSlider.getValue() + "%");
-	    //this.vitesseSlider.addChangeListener(this);
-	    
-	    refreshButton.setBounds(100, 500, 100, 30);
-	    add(refreshButton);
+	    speedSlider.setBounds(100, 240, 100, 30);
+	    speedSlider.setSnapToTicks(true);
+	    speedSlider.setMajorTickSpacing(10);
+	    add(speedSlider);
 
-		nbrTour.setBounds(100, 650, 100, 50);
-		nbrTour.setForeground(Color.RED);
-		add(nbrTour);
+		speedLabel.setBounds(120, 280, 100, 30);
+		speedLabel.setText("Speed = "+1+"%");
+		add(speedLabel);
+
+		rulesButton.setBounds(100, 400, 100, 30);
+		add(rulesButton);
+
+		refreshButton.setBounds(100, 500, 100, 30);
+		add(refreshButton);
+
+		nbrRound.setBounds(100, 650, 100, 50);
+		nbrRound.setForeground(Color.RED);
+		add(nbrRound);
+
+		this.speedSlider.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent event) {
+				int speedValue = speedSlider.getValue();
+				if (speedValue == 0) {
+					speedValue++;
+				}
+				controller.setUps(speedValue);
+				speedLabel.setText("Speed = "+speedValue+"%");
+			}
+		});
 	}
 	
 	public void stateChanged(ChangeEvent e) {
 		label.setText("Vitesse : " + this.vitesseSlider.getValue() + "%");
 	}
 
-	public static void updateTour(){
+	public static void updateRound(){
 		nbr++;
-		nbrTour.setText("Tour : "+nbr);
-		nbrTour.repaint();
+		nbrRound.setText("Round : "+nbr);
+		nbrRound.repaint();
 	}
 	
 	public void addPlayButtonListener(ActionListener l) {
 		playButton.addActionListener(l);
 	}
-	
 	public void addPauseButtonListener(ActionListener l) {
 		pauseButton.addActionListener(l);
 	}
-	
-	public void addreglesButtonListener(ActionListener l) {
-		reglesButton.addActionListener(l);
+	public void addRulesButtonListener(ActionListener l) {
+		rulesButton.addActionListener(l);
 	}
-	
 	public void addRefreshButtonListener(ActionListener l) {
 		refreshButton.addActionListener(l);
 	}
-
 }

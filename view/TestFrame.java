@@ -6,16 +6,18 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import controller.Controller;
-//==
-import java.awt.GraphicsEnvironment;
-import java.awt.Rectangle;
+
+// import java.awt.GraphicsEnvironment;
+// import java.awt.Rectangle;
 
 import controller.Controller;
-//==
+
 public class TestFrame extends JFrame {
 	
 	public Menu menu;
 	public TestPanel testPanel;
+
+	private final int FPS_SET = 144;
 	
 	@SuppressWarnings("unused")
 	private Controller controller;
@@ -38,12 +40,5 @@ public class TestFrame extends JFrame {
 		this.getContentPane().add(this.menu);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
-
-		// setContentPane(new JPanel(null));
-	}
-
-
-	public void menuRepaint(){
-		menu.repaint();
 	}
 }
