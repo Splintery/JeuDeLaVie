@@ -1,4 +1,4 @@
-package view;
+package oldFiles;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 
@@ -7,7 +7,7 @@ import javax.swing.event.MouseInputListener;
 
 import controller.Controller;
 import model.Cellule;
-import view.Menu;
+import view.MenuPanel;
 
 public class Grille extends JPanel implements MouseInputListener{
 

@@ -3,7 +3,8 @@ package view;
 import controller.Controller;
 import model.Cellule;
 import model.Model;
-import view.Menu;
+import view.MenuPanel;
+
 import java.awt.Point;
 import java.util.LinkedList;
 import javax.swing.JPanel;
@@ -19,9 +20,9 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 
-public class TestPanel extends JPanel implements KeyListener, MouseWheelListener, MouseMotionListener, MouseListener{
+public class GamePanel extends JPanel implements KeyListener, MouseWheelListener, MouseMotionListener, MouseListener{
 
-	private static final long serialVersionUID = 1L;
+	
 	protected int midWidth;
 	protected int midHeight;
 	//Pour le moment la taille des Cellules est fixee a 10
@@ -39,7 +40,7 @@ public class TestPanel extends JPanel implements KeyListener, MouseWheelListener
 
 	private Controller controller;
 	
-	public TestPanel(Controller controller) {
+	public GamePanel(Controller controller) {
 		this.controller = controller;
 		this.setBackground(Color.gray);
 
@@ -63,17 +64,17 @@ public class TestPanel extends JPanel implements KeyListener, MouseWheelListener
 	}
 
 	public void paintComponent(Graphics g) {
-		//On actualize les valeurs de midWidth et midHeight
-		this.actualizeSize();
+		//On update les valeurs de midWidth et midHeight
+		//Ainsi que le nombre max de Cellules affichable
+		this.updateSize();
 		//On clear le panel
 		g.setColor(Color.GRAY);
 		g.fillRect(0, 0, this.getSize().width, this.getSize().height);
-		//En gros on repaint en blanc un rectangle de la taille du JPanel
-		g.setColor(Color.BLACK);
+		//En gros on repaint avec la couleur du fond un rectangle de la taille du JPanel
 		this.paintCell(g);
 	}
 
-	private void actualizeSize() {
+	private void updateSize() {
 		this.midWidth = this.getSize().width/2;
 		this.midHeight = this.getSize().height/2;
 
@@ -81,31 +82,30 @@ public class TestPanel extends JPanel implements KeyListener, MouseWheelListener
 		maxY = this.getSize().height / this.sizeCell;
 	}
 	private void paintCell(Graphics g) {
-		try {
-			LinkedList<Cellule> tmp = this.controller.model.getCellulesVivantes();
-			for (int i = 0; i < tmp.size(); i++) {
-
-				if (isValid(tmp.get(i))) {
-					g.setColor(tmp.get(i).getColor());
-					g.fillRect(this.midWidth + (tmp.get(i).getX()+this.decalageX)*sizeCell, this.midHeight + (tmp.get(i).getY()+this.decalageY)*sizeCell, this.sizeCell, this.sizeCell);
-
-				}
+		for (Cellule c : this.controller.model.getCellulesVivantes()) {
+			if (isValid(c)) {
+					g.setColor(c.getColor());
+					Point pointToPaint = convertToPixel(c);
+					g.fillRect((int) pointToPaint.getX(), (int) pointToPaint.getY(), this.sizeCell, this.sizeCell);
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("ERROR FOUND !!!");
 		}
 	}
 
-	private boolean isValid(model.Cellule c) {
+	private boolean isValid(Cellule c) {
 		//La verif consiste a verifier si la cellule est comprise
 		//entre (-maxX, -maxY) et (maxX, maxY)
 		return (c.getX()+this.decalageX < this.maxX && c.getY()+this.decalageY < this.maxY) && (c.getX()+this.decalageX > -this.maxX && c.getY()+this.decalageY > -this.maxY);
 	}
+
+	private Point convertToPixel(Cellule c) {
+		return new Point(this.midWidth + (c.getX()+this.decalageX)*sizeCell, this.midHeight + (c.getY()+this.decalageY)*sizeCell);
+	}
+	private Point convertToActualCoordinate(Point p) {
+		return new Point((int)(Math.floor((double)(p.getX()-this.midWidth) / this.sizeCell) - this.decalageX), (int)(Math.floor((double)(p.getY()-this.midHeight) / this.sizeCell) - this.decalageY));
+	}
+
 	public void mouseClicked(MouseEvent e) {
-	    double x = Math.floor((double)(e.getX()-this.midWidth) / this.sizeCell) - this.decalageX;
-		double y = Math.floor((double)(e.getY()-this.midHeight) / this.sizeCell) - this.decalageY;
-		Cellule c = new Cellule((int)x, (int)y);
+		Cellule c = new Cellule(convertToActualCoordinate(e.getPoint()));
 	    if(this.controller.model.estVivante(c)) {
 	    	controller.model.retirerCellule(c);
 	    }else {
