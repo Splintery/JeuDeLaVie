@@ -1,5 +1,8 @@
 package model;
+
 import java.awt.Color;
+import java.awt.Point;
+
 public class Cellule {
 	
 	private int x;
@@ -10,6 +13,10 @@ public class Cellule {
 	public Cellule(int x, int y) {
 		this.x = x;
 		this.y = y;
+	}
+	public Cellule(Point p) {
+		this.x = (int) p.getX();
+		this.y = (int) p.getY();
 	}
 	
 	public int getX() {

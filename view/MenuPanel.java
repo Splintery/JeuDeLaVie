@@ -15,7 +15,7 @@ import javax.swing.event.ChangeEvent;
 
 import controller.Controller;
 
-public class Menu extends JPanel {
+public class MenuPanel extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -31,7 +31,7 @@ public class Menu extends JPanel {
 	
 	public Controller controller;
 
-	public Menu(Controller controller){
+	public MenuPanel(Controller controller){
 		this.controller = controller;
 	    //this.setSize(300,300);
 	    this.setBounds(700, 0, 700, 700);

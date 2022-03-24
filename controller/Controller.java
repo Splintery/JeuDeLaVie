@@ -1,7 +1,7 @@
 package controller;
 
 import model.Model;
-import view.TestFrame;
+import view.GameFrame;
 
 /**
  * 
@@ -10,7 +10,7 @@ import view.TestFrame;
  */
 public class Controller implements Runnable {
 	
-	public TestFrame view;
+	public GameFrame view;
 	public Model model;
 
 	private Thread gameLoopThread;
@@ -24,7 +24,7 @@ public class Controller implements Runnable {
 
 
 	public Controller() {
-		this.view = new TestFrame(this);
+		this.view = new GameFrame(this);
 		this.model = new Model(this);
 		
 		gameLoopThread = new Thread(this);
@@ -38,13 +38,13 @@ public class Controller implements Runnable {
 	 * Pour l'instant: fait jouer 1 seul tour par click.
 	 */
 	private void addPlayButtonListener() {
-		view.menu.addPlayButtonListener(e -> {
+		view.menuPanel.addPlayButtonListener(e -> {
 			resumeUpdateLoop();
 		});
 	}
 	
 	private void addPauseButtonListener() {
-		view.menu.addPauseButtonListener(e -> {
+		view.menuPanel.addPauseButtonListener(e -> {
 			stopUpdateLoop();
 		});
 	}
@@ -83,7 +83,7 @@ public class Controller implements Runnable {
 			if (!exit) {
 				if (updateTracker >= 1) {
 					update();
-					this.view.menu.updateRound();
+					this.view.menuPanel.updateRound();
 					updates++;
 					updateTracker--;
 				}
@@ -107,16 +107,16 @@ public class Controller implements Runnable {
 	private void resumeUpdateLoop() {
 		if (exit) {
 			this.exit = false;
-			this.view.menu.playButton.setEnabled(false);
-			this.view.menu.pauseButton.setEnabled(true);
+			this.view.menuPanel.playButton.setEnabled(false);
+			this.view.menuPanel.pauseButton.setEnabled(true);
 		}
 		
 	}
 	private void stopUpdateLoop() {
 		if (!exit) {
 			this.exit = true;
-			this.view.menu.playButton.setEnabled(true);
-			this.view.menu.pauseButton.setEnabled(false);
+			this.view.menuPanel.playButton.setEnabled(true);
+			this.view.menuPanel.pauseButton.setEnabled(false);
 		}
 	}
 	
