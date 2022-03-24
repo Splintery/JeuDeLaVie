@@ -23,11 +23,13 @@ public class MenuPanel extends JPanel {
 	public JButton playButton = new JButton("Play");
 	public JButton pauseButton = new JButton("Pause");
 	public JButton refreshButton = new JButton("Clear");
-	private JButton rulesButton = new JButton("Rules");
+	public JButton rulesButton = new JButton("Rules");
+	public JButton fullscreenButton = new JButton("Fullscreen");
+	public JButton escapeFullscreenButton = new JButton("Windowed");
 	public JSlider speedSlider = new JSlider(0, 100, 1);
 	public static int nbr=0;
 	public static JLabel nbrRound = new JLabel("Round : "+nbr);
-	private JLabel speedLabel = new JLabel();
+	public JLabel speedLabel = new JLabel();
 	
 	public Controller controller;
 
@@ -60,6 +62,12 @@ public class MenuPanel extends JPanel {
 
 		refreshButton.setBounds(100, 500, 100, 30);
 		add(refreshButton);
+
+		fullscreenButton.setBounds(100, 600, 100, 30);
+		add(fullscreenButton);
+
+		escapeFullscreenButton.setBounds(100, 700, 100, 30);
+		add(escapeFullscreenButton);
 
 		nbrRound.setBounds(100, 650, 100, 50);
 		nbrRound.setForeground(Color.RED);
@@ -95,5 +103,11 @@ public class MenuPanel extends JPanel {
 	}
 	public void addRefreshButtonListener(ActionListener l) {
 		refreshButton.addActionListener(l);
+	}
+	public void addFullscreenButtonListener(ActionListener l) {
+		this.fullscreenButton.addActionListener(l);
+	}
+	public void addEscapeFullscreenButtonListener(ActionListener l) {
+		this.escapeFullscreenButton.addActionListener(l);
 	}
 }

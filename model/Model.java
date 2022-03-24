@@ -22,7 +22,7 @@ public class Model {
 	 * Liste contenant tous les points des cellules vivantes.
 	 */
 	public volatile LinkedList<Cellule> cellulesVivantes = new LinkedList<>();
-	
+
 	/**
 	 * Represente la generation courante, c'est-a-dire a quel tour on en est.
 	 */
@@ -184,6 +184,12 @@ public class Model {
 			if (!cellulesVivantes.contains(c))
 	 			cellulesVivantes.add(c);
 	 	return this;
+	}
+	public static LinkedList<Cellule> avecListe(LinkedList<Cellule> liste, LinkedList<Cellule> cellules) {
+		for (Cellule c : cellules)
+			if (!liste.contains(c))
+	 			liste.add(c);
+	 	return liste;
 	}
 	
 	/**

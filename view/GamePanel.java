@@ -22,7 +22,8 @@ import java.awt.event.MouseEvent;
 
 public class GamePanel extends JPanel implements KeyListener, MouseWheelListener, MouseMotionListener, MouseListener{
 
-	
+	private static final long serialVersionUID = 1L;
+
 	protected int midWidth;
 	protected int midHeight;
 	//Pour le moment la taille des Cellules est fixee a 10
@@ -101,7 +102,7 @@ public class GamePanel extends JPanel implements KeyListener, MouseWheelListener
 		return new Point(this.midWidth + (c.getX()+this.decalageX)*sizeCell, this.midHeight + (c.getY()+this.decalageY)*sizeCell);
 	}
 	private Point convertToActualCoordinate(Point p) {
-		return new Point((int)(Math.floor((double)(p.getX()-this.midWidth) / this.sizeCell) - this.decalageX), (int)(Math.floor((double)(p.getY()-this.midHeight) / this.sizeCell) - this.decalageY));
+		return new Point((int)(Math.floor((p.getX()-this.midWidth) / this.sizeCell) - this.decalageX), (int)(Math.floor((p.getY()-this.midHeight) / this.sizeCell) - this.decalageY));
 	}
 
 	public void mouseClicked(MouseEvent e) {

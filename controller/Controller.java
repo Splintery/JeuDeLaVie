@@ -3,6 +3,9 @@ package controller;
 import model.Model;
 import view.GameFrame;
 
+import java.awt.GraphicsEnvironment;
+import java.awt.GraphicsDevice;
+
 /**
  * 
  * @author 
@@ -22,6 +25,9 @@ public class Controller implements Runnable {
 	// Le jeu est en pause par default
 	private boolean exit = true;
 
+	private GraphicsEnvironment graphics = GraphicsEnvironment.getLocalGraphicsEnvironment();    
+	private GraphicsDevice device = graphics.getDefaultScreenDevice();
+
 
 	public Controller() {
 		this.view = new GameFrame(this);
@@ -30,6 +36,10 @@ public class Controller implements Runnable {
 		gameLoopThread = new Thread(this);
 		addPlayButtonListener();	
 		addPauseButtonListener();
+		addFullscreenButtonListener();
+		addEscapeFullscreenButtonListener();
+
+
 
 		startGameLoop();
 	}
@@ -46,6 +56,23 @@ public class Controller implements Runnable {
 	private void addPauseButtonListener() {
 		view.menuPanel.addPauseButtonListener(e -> {
 			stopUpdateLoop();
+		});
+	}
+	private void addFullscreenButtonListener() {
+		view.menuPanel.addFullscreenButtonListener(e -> {
+			// this.view.setFullScreen();
+			this.device.setFullScreenWindow(this.view);
+			this.view.menuPanel.fullscreenButton.setEnabled(false);
+			this.view.menuPanel.escapeFullscreenButton.setEnabled(true);
+		});
+	}
+	private void addEscapeFullscreenButtonListener() {
+		view.menuPanel.addEscapeFullscreenButtonListener(e -> {
+			// this.view.escapeFullScreen();
+			// this.device.setDisplayMode(this.displayMode);
+			this.device.setFullScreenWindow(null);
+			this.view.menuPanel.fullscreenButton.setEnabled(true);
+			this.view.menuPanel.escapeFullscreenButton.setEnabled(false);
 		});
 	}
 	
