@@ -14,6 +14,7 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 
 import controller.Controller;
+import view.MenuRegles;
 
 public class MenuPanel extends JPanel {
 	
@@ -83,6 +84,14 @@ public class MenuPanel extends JPanel {
 				speedLabel.setText("Speed = "+speedValue+"%");
 			}
 		});
+
+
+		//A metre dans le fichier controlleur jlai mis la car je sais pas comment le mettre
+		rulesButton.addActionListener(e-> {
+		System.out.println("test");
+		new MenuRegles(controller);
+		});
+
 	}
 	
 
