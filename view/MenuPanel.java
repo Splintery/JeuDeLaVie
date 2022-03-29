@@ -1,12 +1,17 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -27,8 +32,13 @@ public class MenuPanel extends JPanel {
 	public JButton rulesButton = new JButton("Rules");
 	public JButton fullscreenButton = new JButton("Fullscreen");
 	public JButton escapeFullscreenButton = new JButton("Windowed");
+	public JPanel reglesVivantes=new JPanel(new GridLayout(1,8));
+	public JPanel reglesMortes=new JPanel(new GridLayout(1,8));
+	public JLabel[] titre = new JLabel[2];
 	public JSlider speedSlider = new JSlider(0, 100, 1);
 	public static int nbr=0;
+	public JCheckBox[] cocheVivantes=new JCheckBox[8];
+	public JCheckBox[] cocheMortes=new JCheckBox[8];
 	public static JLabel nbrRound = new JLabel("Round : "+nbr);
 	public JLabel speedLabel = new JLabel();
 	
@@ -57,11 +67,33 @@ public class MenuPanel extends JPanel {
 		speedLabel.setBounds(120, 280, 100, 30);
 		speedLabel.setText("Speed = "+1+"%");
 		add(speedLabel);
-
-		rulesButton.setBounds(100, 400, 100, 30);
+		
+		titre[0]=new JLabel("Cellule vivante reste en vie");
+	    titre[1]=new JLabel("Cellule morte revient a la vie");
+	    //reglesVivantes.add(titre[0]);
+	    //reglesMortes.add(titre[1]);
+	    reglesVivantes.setBounds(0, 325,700,70);
+	    reglesVivantes.setBackground(Color.WHITE);
+	    reglesVivantes.setVisible(true);
+	    reglesMortes.setBounds(0, 395,700,70);
+	    reglesMortes.setBackground(Color.PINK);
+	    reglesMortes.setVisible(true);
+	    for(int i=1;i<9;i++) {
+	    	cocheVivantes[i-1]=new JCheckBox(Integer.toString(i));
+	    	cocheMortes[i-1]=new JCheckBox(Integer.toString(i));
+	    	reglesVivantes.add(cocheVivantes[i-1]);
+	    	reglesMortes.add(cocheMortes[i-1]);
+	    	cocheVivantes[i-1].addItemListener(this::boxes_itemStateChanged);
+	    	cocheMortes[i-1].addItemListener(this::boxes_itemStateChanged);
+	    }
+	
+	    add(reglesVivantes);
+	    add(reglesMortes);
+	    
+		rulesButton.setBounds(100, 500, 100, 30);
 		add(rulesButton);
 
-		refreshButton.setBounds(100, 500, 100, 30);
+		refreshButton.setBounds(100, 550, 100, 30);
 		add(refreshButton);
 
 		fullscreenButton.setBounds(100, 600, 100, 30);
@@ -100,6 +132,21 @@ public class MenuPanel extends JPanel {
 		nbrRound.setText("Round : "+nbr);
 		nbrRound.repaint();
 	}
+	
+	void boxes_itemStateChanged(ItemEvent e) {
+       for(int i=1;i<9;i++) {
+    	   boolean selected=cocheVivantes[i-1].isSelected();
+    	   boolean contains=controller.model.getRegles().getVivanteResteEnVie().contains(i);
+    	   if(selected) {
+    		   if(!contains)
+    		   controller.model.getRegles().getVivanteResteEnVie().add((Integer)i);
+    	   }else {
+    		   if(contains) {
+    			   controller.model.getRegles().getVivanteResteEnVie().remove((Integer)i);
+    		   }
+    	   }
+       }
+    }
 	
 	public void addPlayButtonListener(ActionListener l) {
 		playButton.addActionListener(l);
