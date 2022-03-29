@@ -1,7 +1,7 @@
 package model;
 
-import java.util.LinkedList;
 import java.util.Random;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import controller.Controller;
 
@@ -21,7 +21,7 @@ public class Model {
 	/**
 	 * Liste contenant tous les points des cellules vivantes.
 	 */
-	public volatile LinkedList<Cellule> cellulesVivantes = new LinkedList<>();
+	public CopyOnWriteArrayList<Cellule> cellulesVivantes = new CopyOnWriteArrayList<>();
 
 	/**
 	 * Represente la generation courante, c'est-a-dire a quel tour on en est.
@@ -59,7 +59,7 @@ public class Model {
 	 * 
 	 * @return la liste des cellules vivantes.
 	 */
-	public LinkedList<Cellule> getCellulesVivantes(){
+	public CopyOnWriteArrayList<Cellule> getCellulesVivantes(){
 		return cellulesVivantes;
 	}
 	
@@ -85,8 +85,8 @@ public class Model {
 	 * Met a jour la liste de cellules.
 	 */
 	public void update() {
-		LinkedList<Cellule> cellulesASupprimer = cellulesASupprimer();
-		LinkedList<Cellule> cellulesAFaireNaitre = cellulesAFaireNaitre();
+		CopyOnWriteArrayList<Cellule> cellulesASupprimer = cellulesASupprimer();
+		CopyOnWriteArrayList<Cellule> cellulesAFaireNaitre = cellulesAFaireNaitre();
 		supprimerCellulesMortes(cellulesASupprimer);
 		ajouterCellulesAFaireNaitre(cellulesAFaireNaitre);
 		updateColor();
@@ -135,8 +135,8 @@ public class Model {
 	 * @param c la cellule dont on verifie les voisines
 	 * @return la liste des cellules voisines vivantes de la Cellule c
 	 */
-	public LinkedList<Cellule> getCellulesVoisinesVivantes(Cellule c){
-		LinkedList<Cellule> res = new LinkedList<>();
+	public CopyOnWriteArrayList<Cellule> getCellulesVoisinesVivantes(Cellule c){
+		CopyOnWriteArrayList<Cellule> res = new CopyOnWriteArrayList<>();
 		int r = regles.getRayon();
 		for (int i = c.getX() - r; i <= c.getX() + r; i++)
 			for (int j = c.getY() - r; j <= c.getY() + r; j++)
@@ -151,8 +151,8 @@ public class Model {
 	 * @param c la cellule dont on verifie les voisines
 	 * @return la liste des cellules voisines mortes de la Cellule c
 	 */
-	public LinkedList<Cellule> getCellulesVoisinesMortes(Cellule c) {
-		LinkedList<Cellule> res = new LinkedList<>();
+	public CopyOnWriteArrayList<Cellule> getCellulesVoisinesMortes(Cellule c) {
+		CopyOnWriteArrayList<Cellule> res = new CopyOnWriteArrayList<>();
 		int r = regles.getRayon();
 		for (int i = c.getX() - r; i <= c.getX() + r; i++)
 			for (int j = c.getY() - r; j <= c.getY() + r; j++)
@@ -185,7 +185,7 @@ public class Model {
 	 			cellulesVivantes.add(c);
 	 	return this;
 	}
-	public static LinkedList<Cellule> avecListe(LinkedList<Cellule> liste, LinkedList<Cellule> cellules) {
+	public static CopyOnWriteArrayList<Cellule> avecListe(CopyOnWriteArrayList<Cellule> liste, CopyOnWriteArrayList<Cellule> cellules) {
 		for (Cellule c : cellules)
 			if (!liste.contains(c))
 	 			liste.add(c);
@@ -236,7 +236,7 @@ public class Model {
 	 * 
 	 * @param l la liste des cellules a faire mourir
 	 */
-	private void supprimerCellulesMortes(LinkedList<Cellule> cellulesMortes) {
+	private void supprimerCellulesMortes(CopyOnWriteArrayList<Cellule> cellulesMortes) {
 		cellulesVivantes.removeAll(cellulesMortes);
 	}
 	
@@ -245,7 +245,7 @@ public class Model {
 	 * 
 	 * @param l la liste des cellules a faire naitre
 	 */
-	private void ajouterCellulesAFaireNaitre(LinkedList<Cellule> cellulesAFaireNaitre) {
+	private void ajouterCellulesAFaireNaitre(CopyOnWriteArrayList<Cellule> cellulesAFaireNaitre) {
 		cellulesVivantes.addAll(cellulesAFaireNaitre);
 	}
 	
@@ -254,8 +254,8 @@ public class Model {
 	 * 
 	 * @return
 	 */
-	private LinkedList<Cellule> cellulesASupprimer() {
-		LinkedList<Cellule> cellulesASupprimer = new LinkedList<>();
+	private CopyOnWriteArrayList<Cellule> cellulesASupprimer() {
+		CopyOnWriteArrayList<Cellule> cellulesASupprimer = new CopyOnWriteArrayList<>();
 		for (Cellule c : cellulesVivantes) {
 			if (!regles.getVivanteResteEnVie().contains(nbDecellulesVoisinesVivantes(c))) {
 				cellulesASupprimer.add(c);
@@ -269,9 +269,9 @@ public class Model {
 	 * 
 	 * @return la liste des cellules a ajouter a la liste des cellules vivantes
 	 */
-	public LinkedList<Cellule> cellulesAFaireNaitre() {
-		LinkedList<Cellule> cellulesAFaireNaitre = new LinkedList<>();
-		LinkedList<Cellule> cellulesMortesDejaVisitees = new LinkedList<>(); // Liste des cellules mortes deja visitees pour inviter de traiter plusieurs fois un meme point
+	public CopyOnWriteArrayList<Cellule> cellulesAFaireNaitre() {
+		CopyOnWriteArrayList<Cellule> cellulesAFaireNaitre = new CopyOnWriteArrayList<>();
+		CopyOnWriteArrayList<Cellule> cellulesMortesDejaVisitees = new CopyOnWriteArrayList<>(); // Liste des cellules mortes deja visitees pour inviter de traiter plusieurs fois un meme point
 		for (Cellule c : cellulesVivantes) { // Pour toutes les cellules vivantes,
 			for (Cellule d : getCellulesVoisinesMortes(c)) { // telles que pour toutes leurs cellules voisines mortes,
 				if (!cellulesMortesDejaVisitees.contains(d)) { // si celle-ci n'a pas deja visitee
