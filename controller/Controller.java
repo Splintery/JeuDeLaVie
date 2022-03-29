@@ -2,8 +2,13 @@ package controller;
 
 import model.Model;
 import view.GameFrame;
+import view.MenuRegles;
+import view.MenuRegles;
 
 import java.awt.GraphicsEnvironment;
+
+import javax.swing.plaf.basic.BasicBorders.MenuBarBorder;
+
 import java.awt.GraphicsDevice;
 
 /**
@@ -51,7 +56,7 @@ public class Controller implements Runnable {
 		view.menuPanel.addPlayButtonListener(e -> {
 			resumeUpdateLoop();
 		});
-	}
+	} 
 	
 	private void addPauseButtonListener() {
 		view.menuPanel.addPauseButtonListener(e -> {
@@ -154,4 +159,6 @@ public class Controller implements Runnable {
 		this.ups = newUps;
 		this.timePerUpdate = 1000000000.0 / ups;
 	}
+
+
 }

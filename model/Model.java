@@ -309,5 +309,13 @@ public class Model {
 			}
 		}
 	}
+
+	public Regles getRegles(){
+		return this.regles;
+	}
+
+	public void setRegles(Regles nouvelleR){
+		regles = nouvelleR;
+	}
 	
 }
