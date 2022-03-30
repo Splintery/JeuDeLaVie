@@ -69,8 +69,7 @@ public class GamePanel extends JPanel implements KeyListener, MouseWheelListener
 		//Ainsi que le nombre max de Cellules affichable
 		this.updateSize();
 		//On clear le panel
-		g.setColor(Color.GRAY);
-		g.fillRect(0, 0, this.getSize().width, this.getSize().height);
+		super.paintComponent(g);
 		//En gros on repaint avec la couleur du fond un rectangle de la taille du JPanel
 		this.paintCell(g);
 	}
