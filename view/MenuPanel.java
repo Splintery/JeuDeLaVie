@@ -2,6 +2,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +17,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.JTextArea;
 import javax.swing.event.ChangeEvent;
 
 import controller.Controller;
@@ -34,7 +36,7 @@ public class MenuPanel extends JPanel {
 	public JButton escapeFullscreenButton = new JButton("Windowed");
 	public JPanel reglesVivantes=new JPanel(new GridLayout(1,8));
 	public JPanel reglesMortes=new JPanel(new GridLayout(1,8));
-	public JLabel[] titre = new JLabel[2];
+	public JTextArea[] titre = new JTextArea[2];
 	public JSlider speedSlider = new JSlider(0, 100, 1);
 	public static int nbr=0;
 	public JCheckBox[] cocheVivantes=new JCheckBox[8];
@@ -48,7 +50,7 @@ public class MenuPanel extends JPanel {
 		this.controller = controller;
 	    //this.setSize(300,300);
 	    this.setBounds(700, 0, 700, 700);
-	    this.setBackground(Color.DARK_GRAY);
+	    this.setBackground(new Color(200,200,200));
 	    this.setLayout(null);
 	    this.setVisible(true);
 	    
@@ -68,26 +70,37 @@ public class MenuPanel extends JPanel {
 		speedLabel.setText("Speed = "+1+"%");
 		add(speedLabel);
 		
-		titre[0]=new JLabel("Cellule vivante reste en vie");
-	    titre[1]=new JLabel("Cellule morte revient a la vie");
+		titre[0]=new JTextArea("Nombre de cellules voisines vivantes pour\n qu'une cellule vivante reste en vie");
+		titre[0].setEditable(false);
+		titre[0].setOpaque(false);
+	    titre[1]=new JTextArea("Nombre de cellules voisines vivantes pour\n qu'une cellule morte revienne a la vie");
+	    titre[1].setEditable(false);
+		titre[1].setOpaque(false);
 	    //reglesVivantes.add(titre[0]);
 	    //reglesMortes.add(titre[1]);
-	    reglesVivantes.setBounds(0, 325,700,70);
-	    reglesVivantes.setBackground(Color.WHITE);
+	    reglesVivantes.setBounds(0, 360,700,30);
+	    reglesVivantes.setBackground(new Color(200,200,200));
 	    reglesVivantes.setVisible(true);
-	    reglesMortes.setBounds(0, 395,700,70);
-	    reglesMortes.setBackground(Color.PINK);
+	    reglesMortes.setBounds(0, 430,700,30);
+	    reglesMortes.setBackground(new Color(200,200,200));
 	    reglesMortes.setVisible(true);
-	    for(int i=1;i<9;i++) {
-	    	cocheVivantes[i-1]=new JCheckBox(Integer.toString(i));
-	    	cocheMortes[i-1]=new JCheckBox(Integer.toString(i));
-	    	reglesVivantes.add(cocheVivantes[i-1]);
-	    	reglesMortes.add(cocheMortes[i-1]);
-	    	cocheVivantes[i-1].addItemListener(this::boxes_itemStateChanged);
-	    	cocheMortes[i-1].addItemListener(this::boxes_itemStateChanged);
+	    for(int i=0;i<8;i++) {
+	    	cocheVivantes[i]=new JCheckBox(Integer.toString(i+1));
+	    	cocheMortes[i]=new JCheckBox(Integer.toString(i+1));
+	    	cocheVivantes[i].setBounds(i*20,360,10,30);
+	    	cocheMortes[i].setBounds(i*20,430,10,30);
+	    	reglesVivantes.add(cocheVivantes[i]);
+	    	reglesMortes.add(cocheMortes[i]);
+	    	cocheVivantes[i].addItemListener(this::boxes_itemStateChanged);
+	    	cocheMortes[i].addItemListener(this::boxes_itemStateChanged);
+	    	cocheVivantes[i].setBackground(new Color(200,200,200));
+	    	cocheMortes[i].setBackground(new Color(200,200,200));
 	    }
-	
+	    titre[0].setBounds(50, 310, 300, 60);
+	    add(titre[0]);
 	    add(reglesVivantes);
+	    titre[1].setBounds(50, 390, 300, 60);
+	    add(titre[1]);
 	    add(reglesMortes);
 	    
 		rulesButton.setBounds(100, 500, 100, 30);
