@@ -1,6 +1,7 @@
 package model;
 
-import java.util.LinkedList;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 
 public class Jeu {
 	private Model grille;
@@ -18,13 +19,13 @@ public class Jeu {
 		return this.regles;
 	}
 		
-	public LinkedList<Cellule> cellulesAVerif() {
-		LinkedList<Cellule> res=new LinkedList<Cellule>();
-		LinkedList<Cellule> cellulesAModif = new LinkedList<Cellule>();
+	public CopyOnWriteArrayList<Cellule> cellulesAVerif() {
+		CopyOnWriteArrayList<Cellule> res=new CopyOnWriteArrayList<Cellule>();
+		CopyOnWriteArrayList<Cellule> cellulesAModif = new CopyOnWriteArrayList<Cellule>();
 		for(Cellule c : this.grille.getCellulesVivantes()) {
 			Cellule cell=new Cellule(c.getX(),c.getY());
 			res.add(cell);
-			LinkedList<Cellule> voisinesCellule=this.grille.getCellulesVoisinesVivantes(cell);
+			CopyOnWriteArrayList<Cellule> voisinesCellule=this.grille.getCellulesVoisinesVivantes(cell);
 			for(Cellule voisine : voisinesCellule) {
 				if(res.contains(voisine)==false) {
 					res.add(voisine);
@@ -34,8 +35,8 @@ public class Jeu {
 		return res;
 	}
 	
-	public LinkedList<Cellule> cellulesAModif(LinkedList<Cellule> cellulesAVerif) {
-		LinkedList<Cellule> res=new LinkedList<Cellule>();
+	public CopyOnWriteArrayList<Cellule> cellulesAModif(CopyOnWriteArrayList<Cellule> cellulesAVerif) {
+		CopyOnWriteArrayList<Cellule> res=new CopyOnWriteArrayList<Cellule>();
 		for(Cellule c : cellulesAVerif) {
 			if(this.doitEtreModif(c)) {
 				res.add(c);
@@ -59,7 +60,7 @@ public class Jeu {
 	}
 	
 	
-	public void changeEtatGrille(LinkedList<Cellule> cellules){
+	public void changeEtatGrille(CopyOnWriteArrayList<Cellule> cellules){
 		for (Cellule c : cellules ) {
 			boolean vivante=false;
 			for(Cellule cell : this.grille.getCellulesVivantes()) {
