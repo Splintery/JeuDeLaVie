@@ -38,6 +38,7 @@ public class GamePanel extends JPanel implements KeyListener, MouseWheelListener
 
 	private Point prevPoint = new Point(0, 0);
 	private Point currentPoint = new Point(0, 0);
+	private boolean isInSameCell = true;
 
 	private Controller controller;
 	
@@ -70,6 +71,7 @@ public class GamePanel extends JPanel implements KeyListener, MouseWheelListener
 		this.updateSize();
 		//On clear le panel
 		super.paintComponent(g);
+		// this.drawCross(g);
 		//En gros on repaint avec la couleur du fond un rectangle de la taille du JPanel
 		this.paintCell(g);
 	}
@@ -80,6 +82,11 @@ public class GamePanel extends JPanel implements KeyListener, MouseWheelListener
 
 		maxX = this.getSize().width / this.sizeCell;
 		maxY = this.getSize().height / this.sizeCell;
+	}
+	private void drawCross(Graphics g) {
+		g.drawLine(this.midWidth, 0, this.midWidth, (int) (this.getSize().getHeight() * 2));
+		g.drawLine(0, this.midHeight, (int) (this.getSize().getWidth() * 2), this.midHeight);
+
 	}
 	private void paintCell(Graphics g) {
 		for (Cellule c : this.controller.model.getCellulesVivantes()) {
@@ -98,10 +105,10 @@ public class GamePanel extends JPanel implements KeyListener, MouseWheelListener
 	}
 
 	private Point convertToPixel(Cellule c) {
-		return new Point(this.midWidth + (c.getX()+this.decalageX)*sizeCell, this.midHeight + (c.getY()+this.decalageY)*sizeCell);
+		return new Point(this.midWidth + (c.getX()+this.decalageX)*sizeCell, this.midHeight + (-c.getY()+this.decalageY)*sizeCell);
 	}
 	private Point convertToActualCoordinate(Point p) {
-		return new Point((int)(Math.floor((p.getX()-this.midWidth) / this.sizeCell) - this.decalageX), (int)(Math.floor((p.getY()-this.midHeight) / this.sizeCell) - this.decalageY));
+		return new Point((int)(Math.floor((p.getX()-this.midWidth) / this.sizeCell) - this.decalageX), -(int)(Math.floor((p.getY()-this.midHeight) / this.sizeCell) - this.decalageY));
 	}
 
 	public void mouseClicked(MouseEvent e) {
@@ -116,17 +123,20 @@ public class GamePanel extends JPanel implements KeyListener, MouseWheelListener
 	
 	//Lorsque la souris est appuye qqPart sur le JPanel on garde en memoire un point
 	public void mousePressed(MouseEvent e) {
-		this.prevPoint = e.getPoint();
+		this.prevPoint = this.convertToActualCoordinate(e.getPoint());
 	}
 	
 	//Lorsque le click de la souris est maintenu et la souris est deplace on ajoute aux valeurs
 	//decalageX et decalageY (qui sont deja utilise pour deplacer les cellules avec les fleches du 
 	//clavier) la distance entre le point de click et la position actuelle du curseur sur l'ecran
 	public void mouseDragged(MouseEvent e) {
-	    this.currentPoint = e.getPoint();
-		this.decalageX += (int)(this.prevPoint.getX() - this.currentPoint.getX());
-		this.decalageY += (int)(this.prevPoint.getY() - this.currentPoint.getY());
-		this.prevPoint = this.currentPoint;
+	    this.currentPoint = this.convertToActualCoordinate(e.getPoint());
+	  
+	    if (!this.currentPoint.equals(this.prevPoint)) {
+	    	this.decalageX += (int)(-this.prevPoint.getX() - -this.currentPoint.getX());
+			this.decalageY += (int)(this.prevPoint.getY() - this.currentPoint.getY());
+			this.prevPoint = this.convertToActualCoordinate(e.getPoint());
+	    }
 	}
 
 	//getWheelRotation() retourne 1 si l'on zoom vers le haut et -1 vers le bas
