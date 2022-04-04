@@ -54,6 +54,7 @@ public class Controller implements Runnable {
 	private void addPlayButtonListener() {
 		view.menuPanel.addPlayButtonListener(e -> {
 			resumeUpdateLoop();
+
 		});
 	} 
 	
@@ -64,7 +65,6 @@ public class Controller implements Runnable {
 	}
 	private void addFullscreenButtonListener() {
 		view.menuPanel.addFullscreenButtonListener(e -> {
-			// this.view.setFullScreen();
 			this.device.setFullScreenWindow(this.view);
 			this.view.menuPanel.fullscreenButton.setEnabled(false);
 			this.view.menuPanel.escapeFullscreenButton.setEnabled(true);
@@ -72,8 +72,6 @@ public class Controller implements Runnable {
 	}
 	private void addEscapeFullscreenButtonListener() {
 		view.menuPanel.addEscapeFullscreenButtonListener(e -> {
-			// this.view.escapeFullScreen();
-			// this.device.setDisplayMode(this.displayMode);
 			this.device.setFullScreenWindow(null);
 			this.view.menuPanel.fullscreenButton.setEnabled(true);
 			this.view.menuPanel.escapeFullscreenButton.setEnabled(false);

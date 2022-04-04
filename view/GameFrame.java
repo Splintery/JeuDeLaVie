@@ -5,6 +5,7 @@ import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+
 import controller.Controller;
 
 import java.awt.Dimension;
@@ -56,26 +57,4 @@ public class GameFrame extends JFrame {
 		}
 		super.repaint();
 	}
-	// public void setFullScreen() {
-	// 	if (!this.isFullscreen) {
-	// 		this.nonFullscreenDimension = this.getSize();
-	// 		this.isFullscreen = true;
-	// 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-	// 		this.dispose();
-	// 		this.setUndecorated(true);
-	// 		this.pack();
-	// 		this.setVisible(true);
-	// 	}
-		
-	// }
-	// public void escapeFullScreen() {
-	// 	if (this.isFullscreen) {
-	// 		this.isFullscreen = false;
-	// 		this.dispose();
-	// 		this.setUndecorated(false);
-	// 		this.pack();
-	// 		this.setSize(this.nonFullscreenDimension.width, this.nonFullscreenDimension.height);
-	// 		this.setVisible(true);
-	// 	}
-	// }
 }
