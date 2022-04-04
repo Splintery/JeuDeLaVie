@@ -40,6 +40,8 @@ public class GamePanel extends JPanel implements KeyListener, MouseWheelListener
 	private Point currentPoint = new Point(0, 0);
 
 	private Point currentMousePos;
+	private boolean leftClickMode = false;
+	private boolean rightClickMode = false;
 
 	private Controller controller;
 	
@@ -169,7 +171,10 @@ public class GamePanel extends JPanel implements KeyListener, MouseWheelListener
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		Cellule c = new Cellule(convertToActualCoordinate(e.getPoint()));
+		this.addCell(convertToActualCoordinate(e.getPoint()));
+	}
+	private void addCell(Point p) {
+		Cellule c = new Cellule(p);
 	    if(this.controller.model.estVivante(c)) {
 	    	controller.model.retirerCellule(c);
 	    }else {
@@ -181,19 +186,38 @@ public class GamePanel extends JPanel implements KeyListener, MouseWheelListener
 	//Lorsque la souris est appuye qqPart sur le JPanel on garde en memoire un point
 	public void mousePressed(MouseEvent e) {
 		this.prevPoint = this.convertToActualCoordinate(e.getPoint());
+		switch (e.getButton()) {
+			case 1:
+				this.leftClickMode = true;
+				this.rightClickMode = false;
+				break;
+			case 3:
+				this.rightClickMode = true;
+				this.leftClickMode = false;
+				break;
+			default:
+				this.leftClickMode = false;
+				this.rightClickMode = false;
+				break;
+		}
 	}
 	
 	//Lorsque le click de la souris est maintenu et la souris est deplace on ajoute aux valeurs
 	//decalageX et decalageY (qui sont deja utilise pour deplacer les cellules avec les fleches du 
 	//clavier) la distance entre le point de click et la position actuelle du curseur sur l'ecran
 	public void mouseDragged(MouseEvent e) {
-	    this.currentPoint = this.convertToActualCoordinate(e.getPoint());
-	  
-	    if (!this.currentPoint.equals(this.prevPoint)) {
-	    	this.decalageX += (int)(-this.prevPoint.getX() - -this.currentPoint.getX());
-			this.decalageY += (int)(this.prevPoint.getY() - this.currentPoint.getY());
-			this.prevPoint = this.convertToActualCoordinate(e.getPoint());
-	    }
+		this.currentPoint = this.convertToActualCoordinate(e.getPoint());
+		if (!this.currentPoint.equals(this.prevPoint)) {
+			if (this.leftClickMode) {
+				this.decalageX += (int)(-this.prevPoint.getX() - -this.currentPoint.getX());
+				this.decalageY += (int)(this.prevPoint.getY() - this.currentPoint.getY());
+				this.prevPoint = this.convertToActualCoordinate(e.getPoint());
+			} else if (this.rightClickMode) {
+				Point pointToAdd = new Point((int)this.currentPoint.getX(), (int)this.currentPoint.getY());
+				this.addCell(pointToAdd);
+				this.prevPoint = this.convertToActualCoordinate(e.getPoint());
+			}
+		}
 	}
 
 	//getWheelRotation() retourne 1 si l'on zoom vers le haut et -1 vers le bas
