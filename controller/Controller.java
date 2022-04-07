@@ -28,7 +28,7 @@ public class Controller implements Runnable {
 	private final int FPS_SET = 144;
 	private double timePerFrame = 1000000000.0 / FPS_SET;
 	// Le jeu est en pause par default
-	private boolean exit = true;
+	private boolean suspended = true;
 
 	private GraphicsEnvironment graphics = GraphicsEnvironment.getLocalGraphicsEnvironment();    
 	private GraphicsDevice device = graphics.getDefaultScreenDevice();
@@ -108,8 +108,8 @@ public class Controller implements Runnable {
 
 
 			updateTracker += (currentTime - previousTime) / timePerUpdate;
-			// Si le jeu est en pause alors exit = true
-			if (!exit) {
+			// Si le jeu est en pause alors suspended = true
+			if (!suspended) {
 				if (updateTracker >= 1) {
 					update();
 					this.view.menuPanel.updateRound();
@@ -134,16 +134,16 @@ public class Controller implements Runnable {
 	}
 
 	private void resumeUpdateLoop() {
-		if (exit) {
-			this.exit = false;
+		if (suspended) {
+			this.suspended = false;
 			this.view.menuPanel.playButton.setEnabled(false);
 			this.view.menuPanel.pauseButton.setEnabled(true);
 		}
 		
 	}
 	private void stopUpdateLoop() {
-		if (!exit) {
-			this.exit = true;
+		if (!suspended) {
+			this.suspended = true;
 			this.view.menuPanel.playButton.setEnabled(true);
 			this.view.menuPanel.pauseButton.setEnabled(false);
 		}
