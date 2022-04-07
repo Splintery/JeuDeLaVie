@@ -3,6 +3,7 @@ package controller;
 import model.Model;
 import view.GameFrame;
 import view.MenuRegles;
+import view.MenuReglesFrame;
 import view.MenuRegles;
 
 import java.awt.GraphicsEnvironment;
@@ -29,19 +30,21 @@ public class Controller implements Runnable {
 	private double timePerFrame = 1000000000.0 / FPS_SET;
 	// Le jeu est en pause par default
 	private boolean suspended = true;
+	
 
 	private GraphicsEnvironment graphics = GraphicsEnvironment.getLocalGraphicsEnvironment();    
 	private GraphicsDevice device = graphics.getDefaultScreenDevice();
 
 
 	public Controller() {
-		this.view = new GameFrame(this);
 		this.model = new Model(this);
+		this.view = new GameFrame(this);
 		gameLoopThread = new Thread(this);
 		addPlayButtonListener();	
 		addPauseButtonListener();
 		addFullscreenButtonListener();
 		addEscapeFullscreenButtonListener();
+		addRulesButtonListener();
 
 
 
@@ -75,6 +78,12 @@ public class Controller implements Runnable {
 			this.device.setFullScreenWindow(null);
 			this.view.menuPanel.fullscreenButton.setEnabled(true);
 			this.view.menuPanel.escapeFullscreenButton.setEnabled(false);
+		});
+	}
+	private void addRulesButtonListener() {
+		view.menuPanel.addRulesButtonListener(e-> {
+			this.view.menuPanel.rulesButton.setEnabled(false);
+			new MenuReglesFrame(this);
 		});
 	}
 	

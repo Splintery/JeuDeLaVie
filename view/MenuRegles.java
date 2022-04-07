@@ -16,8 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextArea;
 
-public class MenuRegles extends JFrame{
-    JPanel menuRegle = new JPanel(new GridLayout(4,1));
+public class MenuRegles extends JPanel{
     public JPanel reglesVivantes=new JPanel(new GridLayout(1,8));
 	public JPanel reglesMortes=new JPanel(new GridLayout(1,8));
 	public JLabel[] titre = new JLabel[2];
@@ -29,10 +28,10 @@ public class MenuRegles extends JFrame{
         this.controller=c;
         this.setSize(600,200);
         this.setVisible(true);
-        this.getContentPane().add(menuRegle);
-        titre[0]=new JLabel("Nombre de cellules voisines vivantes pour\n qu'une cellule vivante reste en vie");
+        this.setLayout(new GridLayout(4,1));
+        titre[0]=new JLabel("Nombre de cellules voisines vivantes pour\n qu'une cellule vivante reste en vie :");
 		titre[0].setOpaque(false);
-	    titre[1]=new JLabel("Nombre de cellules voisines vivantes pour\n qu'une cellule morte revienne a la vie");
+	    titre[1]=new JLabel("Nombre de cellules voisines vivantes pour\n qu'une cellule morte revienne a la vie :");
 		titre[1].setOpaque(false);
 	    //reglesVivantes.add(titre[0]);
 	    //reglesMortes.add(titre[1]);
@@ -50,16 +49,19 @@ public class MenuRegles extends JFrame{
 	    	cocheVivantes[i].setBackground(new Color(200,200,200));
 	    	cocheMortes[i].setBackground(new Color(200,200,200));
 	    }
+	    cocheVivantes[1].setSelected(true);
+	    cocheVivantes[2].setSelected(true);
+	    cocheMortes[0].setSelected(true);
 	    JPanel titre0=new JPanel();
 	    titre0.setBackground(new Color(200,200,200));
 	    titre0.add(titre[0]);
 	    JPanel titre1=new JPanel();
 	    titre1.setBackground(new Color(200,200,200));
 	    titre1.add(titre[1]);
-	    menuRegle.add(titre0);
-	    menuRegle.add(reglesVivantes);
-	    menuRegle.add(titre1);
-	    menuRegle.add(reglesMortes);
+	    this.add(titre0);
+	    this.add(reglesVivantes);
+	    this.add(titre1);
+	    this.add(reglesMortes);
 
        
 

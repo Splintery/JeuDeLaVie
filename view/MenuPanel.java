@@ -96,12 +96,6 @@ public class MenuPanel extends JPanel {
 		});
 
 
-		//A metre dans le fichier controlleur jlai mis la car je sais pas comment le mettre
-		rulesButton.addActionListener(e-> {
-		System.out.println("test");
-		new MenuRegles(controller);
-		});
-
 	}
 	
 
@@ -118,7 +112,7 @@ public class MenuPanel extends JPanel {
 		pauseButton.addActionListener(l);
 	}
 	public void addRulesButtonListener(ActionListener l) {
-		rulesButton.addActionListener(l);
+		this.rulesButton.addActionListener(l);
 	}
 	public void addRefreshButtonListener(ActionListener l) {
 		refreshButton.addActionListener(l);
