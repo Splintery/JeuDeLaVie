@@ -34,6 +34,7 @@ public class MenuPanel extends JPanel {
 	public JButton rulesButton = new JButton("Rules");
 	public JButton fullscreenButton = new JButton("Fullscreen");
 	public JButton escapeFullscreenButton = new JButton("Windowed");
+	public JButton helpButton = new JButton("Help");
 	public JSlider speedSlider = new JSlider(0, 100, 1);
 	public static int nbr=0;
 	public static JLabel nbrRound = new JLabel("Round : "+nbr);
@@ -79,6 +80,10 @@ public class MenuPanel extends JPanel {
 		escapeFullscreenButton.setBounds(100, 560, 100, 30);
 		escapeFullscreenButton.setEnabled(false);
 		add(escapeFullscreenButton);
+		
+		helpButton.setBounds(100, 630, 100, 30);
+		helpButton.setEnabled(false);
+		add(helpButton);
 
 		nbrRound.setBounds(100, 650, 100, 50);
 		nbrRound.setForeground(Color.RED);
@@ -122,5 +127,8 @@ public class MenuPanel extends JPanel {
 	}
 	public void addEscapeFullscreenButtonListener(ActionListener l) {
 		this.escapeFullscreenButton.addActionListener(l);
+	}
+	public void addHelpButtonListener(ActionListener l) {
+		this.helpButton.addActionListener(l);
 	}
 }

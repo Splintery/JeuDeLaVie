@@ -87,6 +87,18 @@ public class Controller implements Runnable {
 		});
 	}
 	
+	private void addHelpButtonListener() {
+		view.menuPanel.addRulesButtonListener(e-> {
+			this.view.menuPanel.rulesButton.setEnabled(false);
+			new MenuReglesFrame(this);
+		});
+	}
+	
+	/*view.menuPanel.addHelpButtonListener(e-> {
+		this.view.menuPanel.helpButton.setEnabled(false);
+		new HelpFrame(this);
+	});*/
+	
 	public void run() {
 
 		// On a 2 champs pour traquer les updates
