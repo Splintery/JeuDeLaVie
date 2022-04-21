@@ -30,7 +30,7 @@ public class MenuPanel extends JPanel {
 
 	public JButton playButton = new JButton("Play");
 	public JButton pauseButton = new JButton("Pause");
-	public JButton refreshButton = new JButton("Clear");
+	public JButton clearButton = new JButton("Clear");
 	public JButton rulesButton = new JButton("Rules");
 	public JButton fullscreenButton = new JButton("Fullscreen");
 	public JButton escapeFullscreenButton = new JButton("Windowed");
@@ -71,8 +71,8 @@ public class MenuPanel extends JPanel {
 		add(rulesButton);
 		
 
-		refreshButton.setBounds(100, 420, 100, 30);
-		add(refreshButton);
+		clearButton.setBounds(100, 420, 100, 30);
+		add(clearButton);
 
 		fullscreenButton.setBounds(100, 490, 100, 30);
 		add(fullscreenButton);
@@ -119,8 +119,8 @@ public class MenuPanel extends JPanel {
 	public void addRulesButtonListener(ActionListener l) {
 		this.rulesButton.addActionListener(l);
 	}
-	public void addRefreshButtonListener(ActionListener l) {
-		refreshButton.addActionListener(l);
+	public void addClearButtonListener(ActionListener l) {
+		clearButton.addActionListener(l);
 	}
 	public void addFullscreenButtonListener(ActionListener l) {
 		this.fullscreenButton.addActionListener(l);

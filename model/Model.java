@@ -202,6 +202,12 @@ public class Model {
 	public boolean retirerCellule(Cellule c) {
 		return cellulesVivantes.remove(c);
 	}
+	/**
+	 * Cette méthode supprime toutes les cellules vivantes de la liste.
+	 */
+	public void clear() {
+		this.cellulesVivantes.clear();
+	}
 
 	/**
 	 * Calcule le nombre de cellules voisines vivantes d'une cellule.
