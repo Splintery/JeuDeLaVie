@@ -45,7 +45,7 @@ public class Controller implements Runnable {
 		addFullscreenButtonListener();
 		addEscapeFullscreenButtonListener();
 		addRulesButtonListener();
-
+		addClearButtonListener();
 
 
 		startGameLoop();
@@ -66,6 +66,13 @@ public class Controller implements Runnable {
 			stopUpdateLoop();
 		});
 	}
+	
+	private void addClearButtonListener() {
+		view.menuPanel.addClearButtonListener(e -> {
+			model.clear();
+		});
+	}
+	
 	private void addFullscreenButtonListener() {
 		view.menuPanel.addFullscreenButtonListener(e -> {
 			this.device.setFullScreenWindow(this.view);
