@@ -82,7 +82,6 @@ public class MenuPanel extends JPanel {
 		add(escapeFullscreenButton);
 		
 		helpButton.setBounds(100, 630, 100, 30);
-		helpButton.setEnabled(false);
 		add(helpButton);
 
 		nbrRound.setBounds(100, 650, 100, 50);

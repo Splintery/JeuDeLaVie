@@ -2,6 +2,7 @@ package controller;
 
 import model.Model;
 import view.GameFrame;
+import view.HelpFrame;
 import view.MenuRegles;
 import view.MenuReglesFrame;
 import view.MenuRegles;
@@ -46,6 +47,7 @@ public class Controller implements Runnable {
 		addEscapeFullscreenButtonListener();
 		addRulesButtonListener();
 		addClearButtonListener();
+		addHelpButtonListener();
 
 
 		startGameLoop();
@@ -95,9 +97,9 @@ public class Controller implements Runnable {
 	}
 	
 	private void addHelpButtonListener() {
-		view.menuPanel.addRulesButtonListener(e-> {
-			this.view.menuPanel.rulesButton.setEnabled(false);
-			new MenuReglesFrame(this);
+		view.menuPanel.addHelpButtonListener(e-> {
+			this.view.menuPanel.helpButton.setEnabled(false);
+			new HelpFrame(this);
 		});
 	}
 	

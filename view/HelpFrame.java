@@ -14,7 +14,7 @@ public class HelpFrame extends JFrame implements WindowListener{
 		this.c=c;
 		this.setSize(600,200);
         this.setVisible(true);
-		this.getContentPane().add(c.view./*pop up idées*/);
+		this.getContentPane().add(c.view.menuHelp);
 		this.addWindowListener(this);
 	}
 	@Override

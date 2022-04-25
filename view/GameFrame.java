@@ -18,6 +18,7 @@ public class GameFrame extends JFrame {
 	public MenuPanel menuPanel;
 	public GamePanel gamePanel;
 	public MenuRegles menuRegles;
+	public MenuHelp menuHelp;
 
 	private Dimension oldDimension;
 	private final int MENU_WIDTH = 300;
@@ -34,6 +35,7 @@ public class GameFrame extends JFrame {
 	    this.gamePanel = new GamePanel(controller);
 	    this.menuPanel = new MenuPanel(controller);
 	    this.menuRegles = new MenuRegles(controller);
+	    this.menuHelp = new MenuHelp(controller);
 
 	    frameSetUp(1080, 720);
 	}
