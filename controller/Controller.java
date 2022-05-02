@@ -1,17 +1,12 @@
 package controller;
 
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+
 import model.Model;
 import view.GameFrame;
 import view.HelpFrame;
-import view.MenuRegles;
 import view.MenuReglesFrame;
-import view.MenuRegles;
-
-import java.awt.GraphicsEnvironment;
-
-import javax.swing.plaf.basic.BasicBorders.MenuBarBorder;
-
-import java.awt.GraphicsDevice;
 
 /**
  * 
