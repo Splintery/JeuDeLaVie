@@ -203,7 +203,7 @@ public class Model {
 		return cellulesVivantes.remove(c);
 	}
 	/**
-	 * Cette méthode supprime toutes les cellules vivantes de la liste.
+	 * Cette methode supprime toutes les cellules vivantes de la liste.
 	 */
 	public void clear() {
 		this.cellulesVivantes.clear();

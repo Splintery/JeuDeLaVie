@@ -98,7 +98,7 @@ public class Controller implements Runnable {
 	
 	private void addHelpButtonListener() {
 		view.menuPanel.addHelpButtonListener(e-> {
-			this.view.menuPanel.helpButton.setEnabled(false);
+			this.view.menuPanel.helpButton.setEnabled(true);
 			new HelpFrame(this);
 		});
 	}
