@@ -1,5 +1,6 @@
 package model;
 
+import java.io.IOException;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -7,9 +8,6 @@ import controller.Controller;
 
 /**
  * La classe modele contenant la logique du jeu de la vie.
- * 
- * @author 
- *
  */
 public class Model {
 	
@@ -38,6 +36,7 @@ public class Model {
 	 * 
 	 * @param controller le controleur associe au Model
 	 * @param regles les regles du jeu
+	 * @throws IOException 
 	 */
 	public Model(Controller controller, Regles regles) {
 		this.controller = controller;
@@ -49,6 +48,7 @@ public class Model {
 	 * Constructeur ne prenant en parametre que le controleur.
 	 * 
 	 * @param controller le controleur associe au modele
+	 * @throws IOException 
 	 */
 	public Model(Controller controller) {
 		this(controller, null);
@@ -315,7 +315,7 @@ public class Model {
 			}
 		}
 	}
-
+	
 	public Regles getRegles(){
 		return this.regles;
 	}
