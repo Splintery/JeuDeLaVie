@@ -70,6 +70,7 @@ public class Controller implements Runnable {
 	
 	private void addClearButtonListener() {
 		view.menuPanel.addClearButtonListener(e -> {
+			stopUpdateLoop();
 			view.resetDecalage();
 			model.setGeneration(0);
 			model.clear();
