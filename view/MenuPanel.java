@@ -36,8 +36,7 @@ public class MenuPanel extends JPanel {
 	public JButton escapeFullscreenButton = new JButton("Windowed");
 	public JButton helpButton = new JButton("Help");
 	public JSlider speedSlider = new JSlider(0, 100, 1);
-	public static int nbr=0;
-	public static JLabel nbrRound = new JLabel("Round : "+nbr);
+	public JLabel nbrRound;
 	public JLabel speedLabel = new JLabel();
 	
 	public Controller controller;
@@ -49,6 +48,7 @@ public class MenuPanel extends JPanel {
 	    this.setBackground(new Color(200,200,200));
 	    this.setLayout(null);
 	    this.setVisible(true);
+	    nbrRound=new JLabel("Round : "+controller.model.getGeneration());
 	    
 	    playButton.setBounds(100, 100, 100, 30);
 	    add(playButton);
@@ -103,9 +103,8 @@ public class MenuPanel extends JPanel {
 	}
 	
 
-	public static void updateRound(){
-		nbr++;
-		nbrRound.setText("Round : "+nbr);
+	public void updateRound(){
+		nbrRound.setText("Round : "+ controller.model.getGeneration());
 		nbrRound.repaint();
 	}
 	

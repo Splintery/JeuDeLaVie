@@ -2,7 +2,11 @@ package controller;
 
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.io.File;
+import java.util.concurrent.CopyOnWriteArrayList;
 
+import model.Cellule;
+import model.FileConverter;
 import model.Model;
 import view.GameFrame;
 import view.HelpFrame;
@@ -43,7 +47,7 @@ public class Controller implements Runnable {
 		addRulesButtonListener();
 		addClearButtonListener();
 		addHelpButtonListener();
-
+		addValiderButtonListener();
 
 		startGameLoop();
 	}
@@ -66,6 +70,7 @@ public class Controller implements Runnable {
 	
 	private void addClearButtonListener() {
 		view.menuPanel.addClearButtonListener(e -> {
+			model.setGeneration(0);
 			model.clear();
 		});
 	}
@@ -93,10 +98,29 @@ public class Controller implements Runnable {
 	
 	private void addHelpButtonListener() {
 		view.menuPanel.addHelpButtonListener(e-> {
-			this.view.menuPanel.helpButton.setEnabled(true);
+			this.view.menuPanel.helpButton.setEnabled(false);
 			new HelpFrame(this);
 		});
 	}
+	
+	private void addValiderButtonListener() {
+		view.menuHelp.addValiderButtonListener(e-> {
+			 String selectedTemplate =view.menuHelp.menuDeroulant.getItemAt(view.menuHelp.menuDeroulant.getSelectedIndex());
+			 String SE = System.getProperty("os.name").toLowerCase();
+			 String chemin ="";
+			 if(SE.indexOf("win") >= 0) {
+				 chemin ="ressources\\structures\\"+selectedTemplate + ".png";
+			 }else {
+				 chemin="ressources/structures/"+selectedTemplate + ".png";
+			 }
+			 File fichier = new File(chemin);
+			 CopyOnWriteArrayList<Cellule> template= FileConverter.pngToCellLit(fichier);
+			 model.clear();
+			 model.cellulesVivantes.addAll(template);
+		});
+	}
+	
+	
 	
 	/*view.menuPanel.addHelpButtonListener(e-> {
 		this.view.menuPanel.helpButton.setEnabled(false);

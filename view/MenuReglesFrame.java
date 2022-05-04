@@ -16,6 +16,7 @@ public class MenuReglesFrame extends JFrame implements WindowListener{
         this.setVisible(true);
 		this.getContentPane().add(c.view.menuRegles);
 		this.addWindowListener(this);
+		this.setLocationRelativeTo(null);
 	}
 	@Override
 	public void windowOpened(WindowEvent e) {

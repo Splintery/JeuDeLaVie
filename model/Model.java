@@ -73,6 +73,15 @@ public class Model {
 	}
 	
 	/**
+	 * Setter sur le nombre de generations.
+	 * 
+	 * @param le nombre de generations que l'on souhaite
+	 */
+	public void setGeneration(int gen) {
+		this.generation = gen;
+	}
+	
+	/**
 	 * Change les regles du jeu.
 	 * 
 	 * @param regles les nouvelles regles

@@ -12,10 +12,11 @@ public class HelpFrame extends JFrame implements WindowListener{
 	
 	public HelpFrame(Controller c) {
 		this.c=c;
-		this.setSize(600,200);
+		this.setSize(230,130);
         this.setVisible(true);
 		this.getContentPane().add(c.view.menuHelp);
 		this.addWindowListener(this);
+		this.setLocationRelativeTo(null);
 	}
 	@Override
 	public void windowOpened(WindowEvent e) {
