@@ -61,4 +61,7 @@ public class GameFrame extends JFrame {
 		}
 		super.repaint();
 	}
+	public void resetDecalage() {
+		this.gamePanel.resetDecalage();
+	}
 }

@@ -23,7 +23,7 @@ public class MenuHelp extends JPanel{
         String[] options={"acorn","gosper_glider_gun","pulsar","p42_glidershuttle","p856glidergun","spacefiller"};
         menuDeroulant=new JComboBox<>(options);
         Valider = new JButton("Valider");
-        this.add(new JLabel("Sélectionnez une grille : "));
+        this.add(new JLabel("Selectionnez une grille : "));
         this.add(menuDeroulant);
         this.add(Valider);
     }

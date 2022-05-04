@@ -78,6 +78,10 @@ public class GamePanel extends JPanel implements KeyListener, MouseWheelListener
 		this.midWidth = this.width/2;
 		this.midHeight = this.height/2;
 	}
+	public void resetDecalage() {
+		this.decalageX = 0;
+		this.decalageY = 0;
+	}
 	private void drawCross(Graphics g) {
 		g.setColor(Color.RED);
 		g.drawLine(this.midWidth, 0, this.midWidth, (int) (this.getSize().getHeight() * 2));
