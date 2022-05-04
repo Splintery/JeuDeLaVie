@@ -38,6 +38,8 @@ public class MenuPanel extends JPanel {
 	public JSlider speedSlider = new JSlider(0, 100, 1);
 	public JLabel nbrRound;
 	public JLabel speedLabel = new JLabel();
+	public HelpFrame helpFrame;
+	public MenuReglesFrame reglesFrame;
 	
 	public Controller controller;
 

@@ -47,7 +47,8 @@ public class Controller implements Runnable {
 		addRulesButtonListener();
 		addClearButtonListener();
 		addHelpButtonListener();
-		addValiderButtonListener();
+		addValiderTemplatesButtonListener();
+		addValiderReglesButtonListener();
 
 		startGameLoop();
 	}
@@ -94,19 +95,19 @@ public class Controller implements Runnable {
 	private void addRulesButtonListener() {
 		view.menuPanel.addRulesButtonListener(e-> {
 			this.view.menuPanel.rulesButton.setEnabled(false);
-			new MenuReglesFrame(this);
+			view.menuPanel.reglesFrame=new MenuReglesFrame(this);
 		});
 	}
 	
 	private void addHelpButtonListener() {
 		view.menuPanel.addHelpButtonListener(e-> {
 			this.view.menuPanel.helpButton.setEnabled(false);
-			new HelpFrame(this);
+			view.menuPanel.helpFrame=new HelpFrame(this);
 		});
 	}
 	
-	private void addValiderButtonListener() {
-		view.menuHelp.addValiderButtonListener(e-> {
+	private void addValiderTemplatesButtonListener() {
+		view.menuHelp.addValiderTemplatesButtonListener(e-> {
 			 String selectedTemplate =view.menuHelp.menuDeroulant.getItemAt(view.menuHelp.menuDeroulant.getSelectedIndex());
 			 String SE = System.getProperty("os.name").toLowerCase();
 			 String chemin ="";
@@ -119,6 +120,27 @@ public class Controller implements Runnable {
 			 CopyOnWriteArrayList<Cellule> template= FileConverter.pngToCellLit(fichier);
 			 model.clear();
 			 model.cellulesVivantes.addAll(template);
+			 view.menuPanel.helpFrame.dispose();
+			 this.view.menuPanel.helpButton.setEnabled(true);
+		});
+	}
+	private void addValiderReglesButtonListener() {
+		view.menuRegles.addValiderReglesButtonListener(e-> {
+			for(int i=1;i<9;i++) {
+		  	   	boolean selected=view.menuRegles.cocheVivantes[i-1].isSelected();
+		  	   	boolean contains=model.getRegles().getVivanteResteEnVie().contains(i);
+		  	   	if(selected) {
+		  	   		if(!contains)
+		  	   			model.getRegles().getVivanteResteEnVie().add((Integer)i);
+		  	   	}else {
+		  	   		if(contains) {
+		  	   			model.getRegles().getVivanteResteEnVie().remove((Integer)i);
+		  	   		}
+		  	   	}
+		    }
+			view.menuPanel.reglesFrame.dispose();
+			this.view.menuPanel.rulesButton.setEnabled(true);
+			
 		});
 	}
 	

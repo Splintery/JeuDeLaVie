@@ -1,9 +1,9 @@
 package view;
 
 import controller.Controller;
-import java.awt.GridLayout;
+
+import java.awt.Color;
 import java.awt.event.ActionListener;
-import java.util.LinkedList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -26,9 +26,10 @@ public class MenuHelp extends JPanel{
         this.add(new JLabel("Selectionnez une grille : "));
         this.add(menuDeroulant);
         this.add(Valider);
+        this.setBackground(new Color(200,200,200));
     }
     
-    public void addValiderButtonListener(ActionListener l) {
+    public void addValiderTemplatesButtonListener(ActionListener l) {
 		Valider.addActionListener(l);
 	}
 

@@ -12,7 +12,7 @@ public class MenuReglesFrame extends JFrame implements WindowListener{
 	
 	public MenuReglesFrame(Controller c) {
 		this.c=c;
-		this.setSize(600,200);
+		this.setSize(600,220);
         this.setVisible(true);
 		this.getContentPane().add(c.view.menuRegles);
 		this.addWindowListener(this);
