@@ -34,7 +34,8 @@ public class MenuPanel extends JPanel {
 	public JButton rulesButton = new JButton("Rules");
 	public JButton fullscreenButton = new JButton("Fullscreen");
 	public JButton escapeFullscreenButton = new JButton("Windowed");
-	public JButton helpButton = new JButton("Help");
+	public JButton templatesButton = new JButton("Templates");
+	public JButton saveButton = new JButton("Save");
 	public JSlider speedSlider = new JSlider(0, 100, 1);
 	public JLabel nbrRound;
 	public JLabel speedLabel = new JLabel();
@@ -46,47 +47,50 @@ public class MenuPanel extends JPanel {
 	public MenuPanel(Controller controller){
 		this.controller = controller;
 	    //this.setSize(300,300);
-	    this.setBounds(700, 0, 700, 700);
+	    this.setBounds(775, 0, 700, 700);
 	    this.setBackground(new Color(200,200,200));
 	    this.setLayout(null);
 	    this.setVisible(true);
 	    nbrRound=new JLabel("Round : "+controller.model.getGeneration());
 	    
-	    playButton.setBounds(100, 100, 100, 30);
+	    playButton.setBounds(45, 70, 100, 30);
 	    add(playButton);
 	    
-	    pauseButton.setBounds(100, 170, 100, 30);
+	    pauseButton.setBounds(145, 70, 100, 30);
 	    pauseButton.setEnabled(false);
 	    add(pauseButton);
 	    
-	    speedSlider.setBounds(100, 240, 100, 30);
+	    speedSlider.setBounds(100, 120, 100, 30);
 	    speedSlider.setSnapToTicks(true);
 	    speedSlider.setMajorTickSpacing(10);
 	    add(speedSlider);
 
-		speedLabel.setBounds(120, 280, 100, 30);
+		speedLabel.setBounds(120, 150, 100, 30);
 		speedLabel.setText("Speed = "+1+"%");
 		add(speedLabel);
 		
 	    
-		rulesButton.setBounds(100, 350, 100, 30);
+		rulesButton.setBounds(100, 310, 100, 30);
 		add(rulesButton);
 		
 
-		clearButton.setBounds(100, 420, 100, 30);
+		clearButton.setBounds(100, 370, 100, 30);
 		add(clearButton);
 
-		fullscreenButton.setBounds(100, 490, 100, 30);
+		fullscreenButton.setBounds(45, 250, 100, 30);
 		add(fullscreenButton);
 
-		escapeFullscreenButton.setBounds(100, 560, 100, 30);
+		escapeFullscreenButton.setBounds(145, 250, 100, 30);
 		escapeFullscreenButton.setEnabled(false);
 		add(escapeFullscreenButton);
 		
-		helpButton.setBounds(100, 630, 100, 30);
-		add(helpButton);
+		templatesButton.setBounds(45, 190, 100, 30);
+		add(templatesButton);
+		
+		saveButton.setBounds(145,190,100,30);
+		add(saveButton);
 
-		nbrRound.setBounds(100, 650, 100, 50);
+		nbrRound.setBounds(115, 20, 100, 50);
 		nbrRound.setForeground(Color.RED);
 		add(nbrRound);
 
@@ -128,7 +132,10 @@ public class MenuPanel extends JPanel {
 	public void addEscapeFullscreenButtonListener(ActionListener l) {
 		this.escapeFullscreenButton.addActionListener(l);
 	}
-	public void addHelpButtonListener(ActionListener l) {
-		this.helpButton.addActionListener(l);
+	public void addtemplatesButtonListener(ActionListener l) {
+		this.templatesButton.addActionListener(l);
+	}
+	public void addSaveButtonListener(ActionListener l) {
+		this.saveButton.addActionListener(l);
 	}
 }

@@ -49,7 +49,7 @@ public class GamePanel extends JPanel implements KeyListener, MouseWheelListener
 		this.controller = controller;
 		this.setBackground(new Color(115, 115, 115));
 
-		this.setSize(700,700);
+		this.setSize(775,700);
 		// addKeyListener(this);
 	    addMouseMotionListener(this);
 		addMouseWheelListener(this);

@@ -25,7 +25,7 @@ public class HelpFrame extends JFrame implements WindowListener{
 
 	@Override
 	public void windowClosing(WindowEvent e) {
-		c.view.menuPanel.helpButton.setEnabled(true);
+		c.view.menuPanel.templatesButton.setEnabled(true);
 	}
 
 	@Override

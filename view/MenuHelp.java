@@ -4,6 +4,7 @@ import controller.Controller;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -20,8 +21,20 @@ public class MenuHelp extends JPanel{
         this.controller=c;
         this.setSize(200,200);
         this.setVisible(true);
-        String[] options={"acorn","gosper_glider_gun","pulsar","p42_glidershuttle","p856glidergun","spacefiller"};
-        menuDeroulant=new JComboBox<>(options);
+        menuDeroulant=new JComboBox<>();
+        String SE = System.getProperty("os.name").toLowerCase();
+		String chemin ="";
+		if(SE.indexOf("win") >= 0) {
+			chemin ="ressources\\structures";
+		}else {
+			chemin="ressources/structures";
+		}
+		File dossier=new File(chemin);
+        for (File file : dossier.listFiles()) {
+        	if(file.getName().substring(file.getName().length()-4).equals(".png")) {
+        		menuDeroulant.addItem(file.getName().substring(0,file.getName().length()-4));
+        	}
+        }
         Valider = new JButton("Valider");
         this.add(new JLabel("Selectionnez une grille : "));
         this.add(menuDeroulant);

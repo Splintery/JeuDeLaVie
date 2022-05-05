@@ -115,56 +115,66 @@ public class FileConverter {
 	 * Transforme une liste de cellules en sa representation visuelle sous forme de fichier png.
 	 * 
 	 * @param l la liste des cellules
+	 * @param fileName le nom du fichier png voulu
 	 * @return une fichier au format png representant la liste de cellules
 	 * @throws IOException
 	 */
-	public static File cellListToPng(CopyOnWriteArrayList<Cellule> l) {
+	public static File cellListToPng(String fileName,CopyOnWriteArrayList<Cellule> l) {
 		File f = null;
 		try {
-		
-			Cellule left = l.get(0);
-			Cellule right = l.get(0);
-			Cellule bottom = l.get(0);
-			Cellule top = l.get(0);
-			
-			/* On recherche ici le point le plus a gauche, a droite, en bas et en haut de notre liste
-			 * pour en faire par la suite un rectangle avec ces donnees */
-			for (Cellule c : l) {
-				if (c.getX() < left.getX()) {
-					left = c;
+			int width;
+			int height;
+			if(l.size()>0) {
+				Cellule left = l.get(0);
+				Cellule right = l.get(0);
+				Cellule bottom = l.get(0);
+				Cellule top = l.get(0);
+				
+				/* On recherche ici le point le plus a gauche, a droite, en bas et en haut de notre liste
+				 * pour en faire par la suite un rectangle avec ces donnees */
+				for (Cellule c : l) {
+					if (c.getX() < left.getX()) {
+						left = c;
+					}
+					else if (c.getX() > right.getX()) {
+						right = c;
+					}
+					else if (c.getY() < bottom.getY()) {
+						bottom = c;
+					} else if (c.getY() > top.getY()) {
+						top = c;
+					}
 				}
-				else if (c.getX() > right.getX()) {
-					right = c;
+				width = Math.abs(left.getX() - right.getX()) + 3;
+				height = Math.abs(bottom.getY() - top.getY()) + 3;
+				var buffImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+				
+				/* On met tous les pixels de notre image en blanc */
+				for (int i = 0; i < width; i++) {
+					for (int j = 0; j < height; j++) {
+						buffImg.setRGB(i, j, -1);
+					}
 				}
-				else if (c.getY() < bottom.getY()) {
-					bottom = c;
-				} else if (c.getY() > top.getY()) {
-					top = c;
+				
+				/* On parcourt de nouveau notre liste pour les ecrire dans notre image
+				 * Un point de la liste = un pixel noir
+				 * Une transformation est necessaire pour chaque point de la liste pour qu'il soit dans les bornes de notre image */
+				for (Cellule c : l) {
+					buffImg.setRGB(c.getX() - left.getX() + 1, height - (c.getY() - bottom.getY()) - 2, 0);
 				}
+				f = new File(fileName+".png");
+				ImageIO.write(buffImg, "png", f);
+				f.createNewFile();
+				
+			}else {
+				width=1;
+				height=1;
+				var buffImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+				buffImg.setRGB(0, 0, -1);
+				f = new File(fileName+".png");
+				ImageIO.write(buffImg, "png", f);
+				f.createNewFile();
 			}
-			
-			int width = Math.abs(left.getX() - right.getX()) + 3;
-			int height = Math.abs(bottom.getY() - top.getY()) + 3;
-			
-			var buffImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-			
-			/* On met tous les pixels de notre image en blanc */
-			for (int i = 0; i < width; i++) {
-				for (int j = 0; j < height; j++) {
-					buffImg.setRGB(i, j, -1);
-				}
-			}
-			
-			/* On parcourt de nouveau notre liste pour les ecrire dans notre image
-			 * Un point de la liste = un pixel noir
-			 * Une transformation est necessaire pour chaque point de la liste pour qu'il soit dans les bornes de notre image */
-			for (Cellule c : l) {
-				buffImg.setRGB(c.getX() - left.getX() + 1, height - (c.getY() - bottom.getY()) - 2, 0);
-			}
-			
-			f = new File("sauvegarde.png");
-			ImageIO.write(buffImg, "png", f);
-			f.createNewFile();
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

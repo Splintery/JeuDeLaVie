@@ -1,6 +1,7 @@
 package controller;
 
 import java.awt.GraphicsDevice;
+
 import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -28,6 +29,7 @@ public class Controller implements Runnable {
 	private double timePerUpdate = 1000000000.0 / ups;
 	private final int FPS_SET = 144;
 	private double timePerFrame = 1000000000.0 / FPS_SET;
+	private static int nbSaves=0;
 	// Le jeu est en pause par default
 	private boolean suspended = true;
 	
@@ -46,10 +48,23 @@ public class Controller implements Runnable {
 		addEscapeFullscreenButtonListener();
 		addRulesButtonListener();
 		addClearButtonListener();
-		addHelpButtonListener();
+		addtemplatesButtonListener();
 		addValiderTemplatesButtonListener();
 		addValiderReglesButtonListener();
-
+		addSaveButtonListener();
+		String SE = System.getProperty("os.name").toLowerCase();
+		String chemin ="";
+		if(SE.indexOf("win") >= 0) {
+			chemin ="ressources\\structures";
+		}else {
+			chemin="ressources/structures";
+		}
+		File dossier=new File(chemin);
+        for (File file : dossier.listFiles()) {
+        	if(file.getName().contains("save")) {
+        		nbSaves++;
+        	}
+        }
 		startGameLoop();
 	}
 	
@@ -99,10 +114,26 @@ public class Controller implements Runnable {
 		});
 	}
 	
-	private void addHelpButtonListener() {
-		view.menuPanel.addHelpButtonListener(e-> {
-			this.view.menuPanel.helpButton.setEnabled(false);
+	private void addtemplatesButtonListener() {
+		view.menuPanel.addtemplatesButtonListener(e-> {
+			this.view.menuPanel.templatesButton.setEnabled(false);
 			view.menuPanel.helpFrame=new HelpFrame(this);
+		});
+	}
+	
+	private void addSaveButtonListener() {
+		view.menuPanel.addSaveButtonListener(e-> {
+			nbSaves++;
+			String SE = System.getProperty("os.name").toLowerCase();
+			String chemin ="";
+			if(SE.indexOf("win") >= 0) {
+				chemin ="ressources\\structures\\save";
+			}else {
+				chemin="ressources/structures/save";
+			}
+			FileConverter.cellListToPng(chemin+Integer.toString(nbSaves), model.cellulesVivantes);
+			view.menuHelp.menuDeroulant.addItem("save"+Integer.toString(nbSaves));
+			
 		});
 	}
 	
@@ -121,7 +152,7 @@ public class Controller implements Runnable {
 			 model.clear();
 			 model.cellulesVivantes.addAll(template);
 			 view.menuPanel.helpFrame.dispose();
-			 this.view.menuPanel.helpButton.setEnabled(true);
+			 this.view.menuPanel.templatesButton.setEnabled(true);
 		});
 	}
 	private void addValiderReglesButtonListener() {
