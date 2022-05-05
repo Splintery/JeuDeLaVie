@@ -31,7 +31,7 @@ public class MenuHelp extends JPanel{
 		}
 		File dossier=new File(chemin);
         for (File file : dossier.listFiles()) {
-        	if(file.getName().substring(file.getName().length()-4).equals(".png")) {
+        	if(file.getName().substring(file.getName().length()-4).equals(".txt")) {
         		menuDeroulant.addItem(file.getName().substring(0,file.getName().length()-4));
         	}
         }

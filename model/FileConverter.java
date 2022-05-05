@@ -192,12 +192,12 @@ public class FileConverter {
 	 * @param l la liste de cellules
 	 * @return son fichier associe
 	 */
-	public static File cellListToTxt(CopyOnWriteArrayList<Cellule> l) {
+	public static File cellListToTxt(String fileName,CopyOnWriteArrayList<Cellule> l) {
 		File f = null;
 		try {
 			
-			f = new File("sauvegarde.txt");
-			var writer = new FileWriter("sauvegarde.txt");
+			f = new File(fileName+".txt");
+			var writer = new FileWriter(fileName+".txt");
 			for (Cellule c : l) {
 				writer.write(c.getX() + "," + c.getY() + "\n");
 			}

@@ -131,8 +131,8 @@ public class Controller implements Runnable {
 			}else {
 				chemin="ressources/structures/save";
 			}
-			FileConverter.cellListToPng(chemin+Integer.toString(nbSaves), model.cellulesVivantes);
-			view.menuHelp.menuDeroulant.addItem("save"+Integer.toString(nbSaves));
+			FileConverter.cellListToTxt(chemin+nbSaves+"", model.cellulesVivantes);
+			view.menuHelp.menuDeroulant.addItem("save"+nbSaves+"");
 			
 		});
 	}
@@ -143,12 +143,12 @@ public class Controller implements Runnable {
 			 String SE = System.getProperty("os.name").toLowerCase();
 			 String chemin ="";
 			 if(SE.indexOf("win") >= 0) {
-				 chemin ="ressources\\structures\\"+selectedTemplate + ".png";
+				 chemin ="ressources\\structures\\"+selectedTemplate + ".txt";
 			 }else {
-				 chemin="ressources/structures/"+selectedTemplate + ".png";
+				 chemin="ressources/structures/"+selectedTemplate + ".txt";
 			 }
 			 File fichier = new File(chemin);
-			 CopyOnWriteArrayList<Cellule> template= FileConverter.pngToCellLit(fichier);
+			 CopyOnWriteArrayList<Cellule> template= FileConverter.txtToCellList_b(fichier);
 			 model.clear();
 			 model.cellulesVivantes.addAll(template);
 			 view.menuPanel.helpFrame.dispose();
