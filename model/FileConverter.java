@@ -65,7 +65,7 @@ public class FileConverter {
 	 */
 	public static CopyOnWriteArrayList<Cellule> txtToCellList_b(File file) {
 		var l = new CopyOnWriteArrayList<Cellule>();
-		try {
+		try { 
 			
 			var br = new BufferedReader(new FileReader(file));
 			String line;

@@ -213,19 +213,19 @@ public class Controller implements Runnable {
 
 			updateTracker += (currentTime - previousTime) / timePerUpdate;
 			// Si le jeu est en pause alors suspended = true
-			if (!suspended) {
-				if (updateTracker >= 1) {
+			if (updateTracker >= 1) {
+				if (!suspended) {
 					update();
 					this.view.menuPanel.updateRound();
 					updates++;
-					updateTracker--;
 				}
+				updateTracker--;
 			}
 			// On ne rentre dans ce if que si au moins 1 seconde viens de passer
 			// Puis on affiche les FPS ainsi que les UPS
 			if (System.currentTimeMillis() - lastCheck >= 1000) {
 				lastCheck = System.currentTimeMillis();
-				// System.out.println("FPS :"+frames+"\nUPS :"+updates);
+				System.out.println("FPS :"+frames+"\nUPS :"+updates);
 				updates = 0;
 				frames = 0;
 			}
