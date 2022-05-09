@@ -13,6 +13,8 @@ import view.GameFrame;
 import view.HelpFrame;
 import view.MenuReglesFrame;
 
+import javax.swing.ImageIcon;
+
 /**
  * 
  * @author 
@@ -21,6 +23,7 @@ import view.MenuReglesFrame;
 public class Controller implements Runnable {
 	
 	public GameFrame view;
+	private ImageIcon icon;
 	public Model model;
 
 	private Thread gameLoopThread;
@@ -40,7 +43,8 @@ public class Controller implements Runnable {
 
 	public Controller() {
 		this.model = new Model(this);
-		this.view = new GameFrame(this);
+		loadIcon();
+		this.view = new GameFrame(this, icon);
 		gameLoopThread = new Thread(this);
 		addPlayButtonListener();	
 		addPauseButtonListener();
@@ -67,7 +71,9 @@ public class Controller implements Runnable {
         }
 		startGameLoop();
 	}
-	
+	private void loadIcon() {
+		this.icon = new ImageIcon("ressources"+File.separator+"gameTextures"+File.separator+"gol.png");
+	}
 	/**
 	 * Pour l'instant: fait jouer 1 seul tour par click.
 	 */

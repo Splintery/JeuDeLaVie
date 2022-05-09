@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 
 
 import controller.Controller;
@@ -29,7 +30,8 @@ public class GameFrame extends JFrame {
 	@SuppressWarnings("unused")
 	private Controller controller;
 	
-	public GameFrame(Controller controller) {
+	public GameFrame(Controller controller, ImageIcon icon) {
+		this.setIconImage(icon.getImage());
 	    this.setLayout(null);
 
 	    this.gamePanel = new GamePanel(controller);
