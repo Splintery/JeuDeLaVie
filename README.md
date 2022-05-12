@@ -42,7 +42,9 @@ L'utilisateur doit avoir une version récente de [Java](https://www.java.com/fr/
 	* Sous Linux :
 		javac lanceur/Lanceur.java
 		java lanceur.Lanceur
-	* Sous Windows :
+	* Sous Windows(depuis une console BASH):
+		javac lanceur/Lanceur.java
+		java lanceur/Lanceur
 
 
 Auteurs :
