@@ -2,7 +2,7 @@ package view;
 
 import controller.Controller;
 import model.Cellule;
-import model.Model;
+import model.ModelQuadTree;
 import view.MenuPanel;
 
 import java.awt.Point;
