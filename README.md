@@ -22,9 +22,9 @@ Il en résulte une animation visuelle représentant l’évolution de ce systèm
    
 *  L'utilisateur peut charger des grilles déjà existantes, et sauvegarder ses grilles de jeu.
    
-*   Il peut également placer ou retirer des cellule en cliquant sur le plateau.
+*   Il peut également placer ou retirer une cellule en cliquant sur le plateau avec le click gauche, ou maintenir le click droit pour en placer plusieurs à la suite.
    
-*   Il peut aussi zoomer/dézoomer avec la molette de la souris et se déplacer sur le plateau en maintenant le click enfoncé.
+*   Il peut aussi zoomer/dézoomer avec la molette de la souris et se déplacer sur le plateau en maintenant le click gauche enfoncé.
     
 Le projet suit une architecture MVC (Modèle, Vue , Controlleur).
 
@@ -39,8 +39,11 @@ L'utilisateur doit avoir une version récente de [Java](https://www.java.com/fr/
     
 1.   Il faut cloner ce dépot depuis ce [lien](https://gaufre.informatique.univ-paris-diderot.fr/pickern/jeu-de-la-vie.git)
 2.   Soit importer le projet dans l'IDE Eclipse et lancer le jeu dans la classe Lanceur, soit se placer dans le répertoire racine et exécuter la commande suivante :
-	 javac test/Test.java
-	 java test/Test
+	* Sous Linux :
+		javac lanceur/Lanceur.java
+		java lanceur.Lanceur
+	* Sous Windows :
+
 
 Auteurs :
 

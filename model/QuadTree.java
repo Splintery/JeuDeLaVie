@@ -34,7 +34,29 @@ public class QuadTree implements Iterable<Cellule> {
 		this(boundary, capacity, null, "root");
 	}
 
+	private QuadTree getBiggerTree() {
+		return new QuadTree(new Rectangle(boundary.x * 2, boundary.y * 2, boundary.width * 2, boundary.height * 2), capacity);
+	}
+	private void replaceCurrentTree(QuadTree tmp) {
+		boundary = tmp.boundary;
+		points = tmp.points;
+		isSubdivided = tmp.isSubdivided;
+		northEast = tmp.northEast;
+		southEast = tmp.southEast;
+		northWest = tmp.northWest;
+		southWest = tmp.southWest;
+	}
 	public boolean add(Cellule c) {
+		if (parent == null) {
+			
+			while (!boundary.contains(c.getX(), c.getY())) {
+				QuadTree tmp = getBiggerTree();
+				for (Cellule cell : this) {
+					tmp.add(cell);
+				}
+				replaceCurrentTree(tmp);
+			}
+		}
 		return add(c, true);
 	}
 	public boolean add(Cellule c, boolean newCell) {
@@ -312,36 +334,5 @@ public class QuadTree implements Iterable<Cellule> {
 			res += "}\n";
 		}
 		return res;
-	}
-
-	public static void main(String[] args) {
-
-		/*Petit QuadTree pour test l'itérateur*/
-		QuadTree tree = new QuadTree(new Rectangle(0, 0, 100, 100), 1);
-
-		Cellule a = new Cellule(25, 25);
-		Cellule b = new Cellule(75, 25);
-		Cellule c = new Cellule(75, 75);
-		Cellule d = new Cellule(25, 75);
-		Cellule e = new Cellule(49, 49);
-		Cellule f = new Cellule(90, 90);
-		tree.add(a);
-		tree.add(b);
-		tree.add(c);
-		tree.add(d);
-		tree.add(e);
-		tree.add(f);
-
-		/*Petit Exemple de comment on créer un Iterateur et comment l'utiliser*/
-		Iterator<Cellule> itr = tree.iterator();
-		
-		while (itr.hasNext()) {
-			System.out.println(itr.next());
-		}
-		System.out.println();
-		for (Cellule z : tree) {
-			System.out.println(z);
-		}
-		/*Lorsque l'iterateur à atteint la fin de l'arbre, l'appel à "next()" renvoi null*/
 	}
 }

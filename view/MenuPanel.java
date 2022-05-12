@@ -51,7 +51,7 @@ public class MenuPanel extends JPanel {
 	    this.setLayout(null);
 	    this.setVisible(true);
 	    nbrRound=new JLabel("Round : "+controller.model.getGeneration());
-	    
+
 	    playButton.setBounds(45, 70, 100, 30);
 	    add(playButton);
 	    
@@ -67,7 +67,7 @@ public class MenuPanel extends JPanel {
 		speedLabel.setBounds(120, 150, 100, 30);
 		speedLabel.setText("Speed = "+1+"%");
 		add(speedLabel);
-		
+
 	    
 		rulesButton.setBounds(100, 310, 100, 30);
 		add(rulesButton);

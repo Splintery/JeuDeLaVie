@@ -182,13 +182,6 @@ public class Controller implements Runnable {
 		});
 	}
 	
-	
-	
-	/*view.menuPanel.addHelpButtonListener(e-> {
-		this.view.menuPanel.helpButton.setEnabled(false);
-		new HelpFrame(this);
-	});*/
-	
 	public void run() {
 
 		// On a 2 champs pour traquer les updates

@@ -20,7 +20,7 @@ public class ModelQuadTree {
 	/**
 	 * Liste contenant tous les points des cellules vivantes.
 	 */
-	public QuadTree cellulesVivantes = new QuadTree(new Rectangle(-5000, -5000, 10000, 10000), 2);
+	public QuadTree cellulesVivantes = new QuadTree(new Rectangle(-100, -100, 200, 200), 3);
 
 	/**
 	 * Represente la generation courante, c'est-a-dire a quel tour on en est.
@@ -72,7 +72,7 @@ public class ModelQuadTree {
 	public int getGeneration() {
 		return generation;
 	}
-	
+
 	/**
 	 * Setter sur le nombre de generations.
 	 * 
