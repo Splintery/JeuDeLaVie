@@ -9,6 +9,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import model.Cellule;
 import model.FileConverter;
 import model.Model;
+import model.ModelQuadTree;
 import view.GameFrame;
 import view.HelpFrame;
 import view.MenuReglesFrame;
@@ -24,7 +25,7 @@ public class Controller implements Runnable {
 	
 	public GameFrame view;
 	private ImageIcon icon;
-	public Model model;
+	public ModelQuadTree model;
 
 	private Thread gameLoopThread;
 	
@@ -42,7 +43,7 @@ public class Controller implements Runnable {
 
 
 	public Controller() {
-		this.model = new Model(this);
+		this.model = new ModelQuadTree(this);
 		loadIcon();
 		this.view = new GameFrame(this, icon);
 		gameLoopThread = new Thread(this);
@@ -137,7 +138,7 @@ public class Controller implements Runnable {
 			}else {
 				chemin="ressources/structures/save";
 			}
-			FileConverter.cellListToTxt(chemin+nbSaves+"", model.cellulesVivantes);
+			FileConverter.cellListToTxt(chemin+nbSaves+"", model.cellulesVivantes.getList());
 			view.menuHelp.menuDeroulant.addItem("save"+nbSaves+"");
 			
 		});

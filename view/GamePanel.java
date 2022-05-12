@@ -233,42 +233,9 @@ public class GamePanel extends JPanel implements KeyListener, MouseWheelListener
 		//Ici 1000 represente la taille maximale en pixel d'une cellule
 		} else if (e.getWheelRotation() < 0 && this.sizeCell < 500){
 			this.sizeCell++;
-			// this.zoomOnCursor();
 		}
-		// if (e.getWheelRotation() > 0) {
-		// 	this.zoomOutCursor();
-		// }
-		// System.out.format("decalageX => %d && decalageY => %d\n", this.decalageX, this.decalageY);
 	}
-	// private void zoomOnCursor() {
-	// 	// if (this.currentMousePos.getX() > this.decalageX * this.sizeCell) {
-	// 	// 	this.decalageX--;
-	// 	// } else {
-	// 	// 	this.decalageX++;
-	// 	// }
-	// 	// if (this.currentMousePos.getY() > this.decalageY * this.sizeCell) {
-	// 	// 	this.decalageY--;
-	// 	// } else {
-	// 	// 	this.decalageY++;
-	// 	// }
-	// 	this.decalageX += (int)(this.currentMousePos.getX());
-	// 	this.decalageY += (int)(-this.currentMousePos.getY());
-	// }
-	// private void zoomOutCursor() {
-	// 	// if (this.currentMousePos.getX() > this.decalageX * this.sizeCell) {
-	// 	// 	this.decalageX++;
-	// 	// } else {
-	// 	// 	this.decalageX--;
-	// 	// }
-	// 	// if (this.currentMousePos.getY() > this.decalageY * this.sizeCell) {
-	// 	// 	this.decalageY++;
-	// 	// } else {
-	// 	// 	this.decalageY--;
-	// 	// }
-	// 	this.decalageX -= (int)(this.currentMousePos.getX());
-	// 	this.decalageY -= (int)(-this.currentMousePos.getY());
-	// }
-
+	
 	//Les valeurs 37, 38, 39, et 40 representent les fleches gauche, haut, droite et bas respectivement
 	public void keyPressed(KeyEvent e) {
 		switch(e.getKeyCode()) {

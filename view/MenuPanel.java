@@ -46,7 +46,6 @@ public class MenuPanel extends JPanel {
 
 	public MenuPanel(Controller controller){
 		this.controller = controller;
-	    //this.setSize(300,300);
 	    this.setBounds(775, 0, 700, 700);
 	    this.setBackground(new Color(200,200,200));
 	    this.setLayout(null);
