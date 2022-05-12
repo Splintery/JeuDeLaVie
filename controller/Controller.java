@@ -8,7 +8,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import model.Cellule;
 import model.FileConverter;
-import model.Model;
 import model.ModelQuadTree;
 import view.GameFrame;
 import view.HelpFrame;
