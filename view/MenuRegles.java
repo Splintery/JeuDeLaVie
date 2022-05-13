@@ -1,21 +1,16 @@
 package view;
 
 import controller.Controller;
-import model.Regles;
-import java.util.List;
+
+
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.util.LinkedList;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSlider;
-import javax.swing.JTextArea;
 
 public class MenuRegles extends JPanel{
     public JPanel reglesVivantes=new JPanel(new GridLayout(1,8));

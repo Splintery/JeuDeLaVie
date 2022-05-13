@@ -39,10 +39,12 @@ L'utilisateur doit avoir une version récente de [Java](https://www.java.com/fr/
     
 1.   Il faut cloner ce dépot depuis ce [lien](https://gaufre.informatique.univ-paris-diderot.fr/pickern/jeu-de-la-vie.git)
 2.   Soit importer le projet dans l'IDE Eclipse et lancer le jeu dans la classe Lanceur, soit se placer dans le répertoire racine et exécuter la commande suivante :
-	* Sous Linux :
+
+	*  Sous Linux :
 		javac lanceur/Lanceur.java
 		java lanceur.Lanceur
-	* Sous Windows(depuis une console BASH):
+		
+	*  Sous Windows(depuis une console BASH):
 		javac lanceur/Lanceur.java
 		java lanceur/Lanceur
 

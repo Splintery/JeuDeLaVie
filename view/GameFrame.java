@@ -1,9 +1,6 @@
 package view;
 
-import java.awt.Color;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 
 
@@ -24,7 +21,6 @@ public class GameFrame extends JFrame {
 	private Dimension oldDimension;
 	private final int MENU_WIDTH = 300;
 
-	private Dimension nonFullscreenDimension;
 	public boolean isFullscreen = false;
 	
 	@SuppressWarnings("unused")
@@ -46,7 +42,6 @@ public class GameFrame extends JFrame {
 		this.setTitle("Game of Life");
 		this.setSize(width, height);
 		this.oldDimension = this.getSize();
-		this.nonFullscreenDimension = this.getSize();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.getContentPane().add(this.gamePanel);
 		this.getContentPane().add(this.menuPanel);

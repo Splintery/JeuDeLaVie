@@ -267,7 +267,6 @@ public class QuadTree implements Iterable<Cellule> {
 	private class QuadTreeIterator implements Iterator<Cellule> {
 
 		public QuadTree currentTree;
-		public Cellule currentCell;
 		public int index = 0;
 
 		public QuadTree hasNextTree;
