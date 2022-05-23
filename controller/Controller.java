@@ -164,14 +164,24 @@ public class Controller implements Runnable {
 	private void addValiderReglesButtonListener() {
 		view.menuRegles.addValiderReglesButtonListener(e-> {
 			for(int i=1;i<9;i++) {
-		  	   	boolean selected=view.menuRegles.cocheVivantes[i-1].isSelected();
-		  	   	boolean contains=model.getRegles().getVivanteResteEnVie().contains(i);
-		  	   	if(selected) {
-		  	   		if(!contains)
+		  	   	boolean selected1=view.menuRegles.cocheVivantes[i-1].isSelected();
+		  	   	boolean contains1=model.getRegles().getVivanteResteEnVie().contains(i);
+		  	   	boolean selected2=view.menuRegles.cocheMortes[i-1].isSelected();
+		  		boolean contains2=model.getRegles().getMortePrendVie().contains(i);
+		  	   	if(selected1) {
+		  	   		if(!contains1)
 		  	   			model.getRegles().getVivanteResteEnVie().add((Integer)i);
 		  	   	}else {
-		  	   		if(contains) {
+		  	   		if(contains1) {
 		  	   			model.getRegles().getVivanteResteEnVie().remove((Integer)i);
+		  	   		}
+		  	   	}
+		  	  if(selected2) {
+		  	   		if(!contains2)
+		  	   			model.getRegles().getMortePrendVie().add((Integer)i);
+		  	   	}else {
+		  	   		if(contains2) {
+		  	   			model.getRegles().getMortePrendVie().remove((Integer)i);
 		  	   		}
 		  	   	}
 		    }
