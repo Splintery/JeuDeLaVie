@@ -234,7 +234,7 @@ public class Controller implements Runnable {
 			// Puis on affiche les FPS ainsi que les UPS
 			if (System.currentTimeMillis() - lastCheck >= 1000) {
 				lastCheck = System.currentTimeMillis();
-				System.out.println("FPS :"+frames+"\nUPS :"+updates);
+				//System.out.println("FPS :"+frames+"\nUPS :"+updates);	
 				updates = 0;
 				frames = 0;
 			}

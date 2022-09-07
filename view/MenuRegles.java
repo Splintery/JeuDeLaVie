@@ -48,7 +48,7 @@ public class MenuRegles extends JPanel{
 	    }
 	    cocheVivantes[1].setSelected(true);
 	    cocheVivantes[2].setSelected(true);
-	    cocheMortes[0].setSelected(true);
+	    cocheMortes[2].setSelected(true);
 	    JPanel titre0=new JPanel();
 	    titre0.setBackground(bgColor);
 	    titre0.add(titre[0]);
